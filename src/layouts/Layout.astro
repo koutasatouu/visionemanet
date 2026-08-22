@@ -1,0 +1,166 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Visionema.net - Agensi Media Sosial & Branding",
+  description = "Bukan sekadar agensi media sosial yang memposting konten. Kami peduli bagaimana brand Anda dipandang oleh audiens. Mulai, Tumbuh, dan Menang Bareng Visionema.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-accent selection:text-white"
+  >
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @font-face {
+    font-family: "MADE Tommy";
+    src: url("/src/assets/font/made_tommy/MADE TOMMY Light_PERSONAL USE.otf")
+      format("opentype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "MADE Tommy";
+    src: url("/src/assets/font/made_tommy/MADE TOMMY Regular_PERSONAL USE.otf")
+      format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "MADE Tommy";
+    src: url("/src/assets/font/made_tommy/MADE TOMMY Medium_PERSONAL USE.otf")
+      format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "MADE Tommy";
+    src: url("/src/assets/font/made_tommy/MADE TOMMY Bold_PERSONAL USE.otf")
+      format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "MADE Tommy";
+    src: url("/src/assets/font/made_tommy/MADE TOMMY ExtraBold_PERSONAL USE.otf")
+      format("opentype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    /* Visionema Color Palette (Default Dark Mode) */
+    --background: 240 50% 5%; /* #080816 - Sangat gelap kebiruan */
+    --foreground: 180 100% 97%; /* #efffff - Putih kebiruan terang */
+    --muted: 240 35% 10%; /* Biru gelap keabu-abuan untuk kartu */
+    --muted-foreground: 206 54% 75%; /* Biru muda */
+    --accent: 26 100% 50%; /* #ff7000 (Oranye) */
+    --accent-yellow: 46 100% 52%; /* #fcc000 */
+  }
+
+  html {
+    /* Lenis smooth scrolling takes care of scroll behavior */
+  }
+
+  /* Lenis support styles */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  body {
+    font-family: "MADE Tommy", "Plus Jakarta Sans", "Geist Sans", sans-serif;
+  }
+
+  .skip-to-content {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1rem;
+    background: #ff7000;
+    color: white;
+  }
+  .skip-to-content:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+  }
+</style>
+
+<script>
+  import Lenis from "lenis";
+
+  // Initialize Lenis smooth scroll
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    infinite: false,
+  });
+
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = anchor.getAttribute("href");
+      if (targetId && targetId !== "#") {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement instanceof HTMLElement) {
+          lenis.scrollTo(targetElement, {
+            offset: -100, // Account for fixed header
+            duration: 1.5,
+          });
+        }
+      }
+    });
+  });
+</script>

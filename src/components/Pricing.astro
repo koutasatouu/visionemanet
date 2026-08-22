@@ -1,0 +1,263 @@
+---
+const packages = [
+  {
+    name: "Mulai Aja Dulu...",
+    price: "Rp 2.699k",
+    tagline: "Konsistensi & Presence",
+    popular: false,
+    content: [
+      "8 Video",
+      "4 Foto Feed",
+      "Desain / Carousel"
+    ],
+    types: [
+      "Aesthetic B-Roll (Tanpa Naskah)"
+    ],
+    toppings: [
+      "Posting & Caption Sederhana",
+      "Setup Profil Awal",
+      "Laporan Bulanan Sederhana"
+    ]
+  },
+  {
+    name: "Level Up!",
+    price: "Rp 4.699k",
+    tagline: "Engagement & Konversi",
+    popular: true,
+    content: [
+      "12 Video",
+      "8 Foto Feed",
+      "2 Desain / Carousel"
+    ],
+    types: [
+      "Aesthetic B-Roll (Tanpa Naskah)",
+      "Skrip Strategis (Hook/CTA)"
+    ],
+    toppings: [
+      "Posting & Caption Sederhana",
+      "Setup Profil Awal",
+      "Laporan Bulanan Sederhana",
+      "Manajemen Akun (Account Handling)",
+      "Admin DM & Kolom Komentar",
+      "Analisis Performa & Strategi",
+      "Pilar Strategi Konten Penuh",
+      "Engagement Proaktif",
+      "Update SEO & Sorotan (Highlight)"
+    ]
+  },
+  {
+    name: "Scale Up!",
+    price: "Rp 8.699k",
+    tagline: "Membangun Brand & ROI",
+    popular: false,
+    content: [
+      "20 Video",
+      "12 Foto Feed",
+      "4 Desain / Carousel"
+    ],
+    types: [
+      "Aesthetic B-Roll (Tanpa Naskah)",
+      "Skrip Strategis (Hook/CTA)",
+      "Penulisan Naskah Naratif Penuh"
+    ],
+    toppings: [
+      "Posting & Caption Sederhana",
+      "Setup Profil Awal",
+      "Laporan Bulanan Sederhana",
+      "Manajemen Akun (Account Handling)",
+      "Admin DM & Kolom Komentar",
+      "Analisis Performa & Strategi",
+      "Pilar Strategi Konten Penuh",
+      "Engagement Proaktif",
+      "Update SEO & Sorotan (Highlight)",
+      "Dashboard Laporan KPI",
+      "Audit Strategi Brand Bulanan"
+    ]
+  }
+];
+---
+
+<section id="packages" class="py-24 bg-background border-t border-white/5">
+  <div class="px-6 sm:px-12 lg:px-24 max-w-360 2xl:max-w-450 3xl:max-w-550 mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs uppercase font-mono tracking-widest text-accent font-bold">Investasi Terbaik</span>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground mt-4">
+        Marketing adalah Investasi, Bukan Beban.
+      </h2>
+      <p class="text-foreground/75 mt-4">
+        Pilih paket yang sesuai dengan fase pertumbuhan bisnis Anda saat ini.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      {packages.map((pkg) => (
+        <div class={`relative transition-all duration-300 ${pkg.popular ? 'lg:scale-105 z-10' : ''}`}>
+          {pkg.popular && (
+            <div class="glow-border-container">
+              <div class="glow-border-beam"></div>
+              <div class="glow-border-content">
+                <span>Rekomendasi</span>
+              </div>
+            </div>
+          )}
+
+          <div class={`relative w-full h-full rounded-[2.5rem] p-[1.5px] overflow-hidden ${pkg.popular ? 'glow-card-container' : 'bg-white/5 border border-white/10 hover:shadow-2xl'}`}>
+            {pkg.popular && <div class="glow-card-beam"></div>}
+            
+            <div class={`relative w-full h-full rounded-[2.5rem] p-8 sm:p-10 flex flex-col justify-between ${pkg.popular ? 'bg-[#121217]' : ''}`}>
+              <div>
+                <div class="text-center pb-6 border-b border-white/10">
+                  <h3 class="text-2xl font-bold text-foreground">{pkg.name}</h3>
+                  <p class="text-sm font-semibold text-accent mt-1">{pkg.tagline}</p>
+                  <div class="mt-4 flex items-baseline justify-center text-foreground">
+                    <span class="text-4xl font-extrabold tracking-tight">{pkg.price}</span>
+                    <span class="ml-1 text-sm font-semibold text-foreground/60">/ bulan</span>
+                  </div>
+                </div>
+
+                <!-- Content list -->
+                <div class="mt-8 space-y-6">
+                  <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-foreground/40 mb-3 font-mono">Konten</h4>
+                    <ul class="space-y-2 text-sm text-foreground/90 font-medium">
+                      {pkg.content.map((item) => (
+                        <li class="flex items-center gap-2">
+                          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-foreground/40 mb-3 font-mono">Jenis Produksi</h4>
+                    <ul class="space-y-2 text-sm text-foreground/90 font-medium">
+                      {pkg.types.map((item) => (
+                        <li class="flex items-center gap-2">
+                          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-foreground/40 mb-3 font-mono">Layanan / Topping</h4>
+                    <ul class="space-y-2 text-xs text-foreground/75 font-semibold">
+                      {pkg.toppings.map((item) => (
+                        <li class="flex items-start gap-2">
+                          <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8 pt-6 border-t border-white/10">
+                <a 
+                  href="https://wa.me/6281234567890" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={`w-full inline-flex items-center justify-center px-6 py-3.5 rounded-2xl font-bold text-sm transition-all duration-200 ${pkg.popular ? 'bg-accent text-white hover:bg-accent/90 shadow-md shadow-accent/20' : 'bg-white/10 text-foreground hover:bg-white/20'}`}
+                >
+                  Pilih Paket Ini
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes border-glow-rotate {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  .glow-card-container {
+    position: relative;
+    box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.25); /* Soft, cool glow shadow */
+  }
+
+  .glow-card-beam {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 35%,
+      #3b82f6 48%,
+      #06b6d4 52%,
+      #8b5cf6 56%,
+      transparent 65%
+    );
+    animation: border-glow-rotate 8s linear infinite;
+    transform-origin: center;
+    filter: blur(8px); /* Softer, broader bleed for the large container */
+    z-index: 0;
+  }
+
+  .glow-border-container {
+    position: absolute;
+    top: -1rem; /* -top-4 */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1.5px;
+    border-radius: 9999px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 4px 20px -2px rgba(59, 130, 246, 0.4); /* Soft blue glow shadow */
+  }
+
+  .glow-border-beam {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250%;
+    height: 250%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 35%,
+      #3b82f6 48%,
+      #06b6d4 52%,
+      #8b5cf6 56%,
+      transparent 65%
+    );
+    animation: border-glow-rotate 6s linear infinite;
+    transform-origin: center;
+    filter: blur(2px);
+  }
+
+  .glow-border-content {
+    position: relative;
+    background-color: #121217; /* Solid dark color matching cards */
+    padding: 6px 16px; /* py-1.5 px-4 */
+    border-radius: 9999px;
+    color: #ffffff;
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 700; /* font-bold */
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* tracking-wider */
+    display: flex;
+    align-items: center;
+    gap: 6px; /* gap-1.5 */
+    z-index: 1;
+    white-space: nowrap;
+  }
+</style>

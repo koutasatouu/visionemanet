@@ -1,0 +1,85 @@
+---
+import DarkVeil from "./reactbits/DarkVeil.tsx";
+import SplitText from "./reactbits/SplitText.tsx";
+import VisionemaLogo from "./VisionemaLogo.tsx";
+---
+
+<section
+  id="hero"
+  class="relative h-screen w-full bg-background overflow-hidden flex items-center justify-center"
+>
+  <div class="absolute inset-0 z-0">
+    <DarkVeil
+      client:load
+      speed={0.2}
+      noiseIntensity={0.03}
+      scanlineIntensity={0.05}
+    />
+  </div>
+
+  <div
+    class="relative z-10 mx-auto flex h-full w-full max-w-360 flex-col justify-center px-6 text-center items-center sm:px-12 lg:px-24 2xl:max-w-450 3xl:max-w-550"
+  >
+    <!-- Animated Logo in Hero Center -->
+    <div
+      class="mb-8 animate-fade-in opacity-0"
+      style="animation: fadeIn 1s ease-out forwards;"
+    >
+      <VisionemaLogo className="h-28 sm:h-36 w-auto drop-shadow-xl" />
+    </div>
+
+    <h1
+      class="text-[clamp(2.75rem,6.5vw,9rem)] leading-[1.05] tracking-tight text-foreground font-extrabold select-none mb-6"
+    >
+      <SplitText text="Mulai, Tumbuh, dan" client:load delay={0.2} /><br />
+      <span class="font-serif italic font-normal text-accent drop-shadow-sm">
+        <SplitText text="Menang Bareng!" client:load delay={0.5} />
+      </span>
+    </h1>
+
+    <p
+      class="max-w-2xl text-[clamp(1.1rem,1.3vw,1.5rem)] leading-relaxed text-foreground/80 animate-fade-in opacity-0"
+      style="animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;"
+    >
+      Bukan sekadar agensi media sosial yang sekedar memposting konten. Kami
+      peduli bagaimana brand Anda dipandang oleh audiens. Kami ingin tumbuh dan
+      menang bersama.
+    </p>
+
+    <div
+      class="mt-10 animate-fade-in opacity-0"
+      style="animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;"
+    >
+      <a
+        href="#packages"
+        class="px-8 py-4 rounded-full bg-accent text-white font-bold text-lg hover:bg-accent/90 transition-colors shadow-lg shadow-accent/20 hover:scale-105 active:scale-95 duration-200"
+      >
+        Lihat Paket Layanan
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 w-full max-w-360 px-6 sm:px-12 lg:px-24 2xl:max-w-450 3xl:max-w-550 flex justify-between items-center opacity-70"
+  >
+    <span class="text-xs uppercase tracking-widest font-mono text-foreground/60"
+      >Start, Grow, Win!</span
+    >
+    <span class="text-xs uppercase tracking-widest font-mono text-foreground/60"
+      >Visionema © 2026</span
+    >
+  </div>
+</section>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

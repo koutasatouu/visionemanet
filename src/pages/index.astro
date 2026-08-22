@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.tsx';
+import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
+import Services from '../components/Services.astro';
+import Pricing from '../components/Pricing.astro';
+import SocialProof from '../components/SocialProof.astro';
+import Team from '../components/Team.astro';
+import FaqAccordion from '../components/reactbits/FaqAccordion.tsx';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    question: "Apa bedanya Visionema.net dengan agensi media sosial lainnya?",
+    answer: "Kami tidak sekadar memposting konten terjadwal di akun Anda. Kami melakukan analisis audiens mendalam, meriset hook penulisan skrip video terarah (untuk konten estetis maupun naratif), dan memprioritaskan bagaimana brand value Anda dipandang oleh audiens untuk memaksimalkan ROI dan interaksi."
+  },
+  {
+    question: "Berapa lama kontrak kerja sama minimal?",
+    answer: "Untuk paket bulanan, kerja sama dilakukan per bulan dengan evaluasi kinerja rutin di akhir bulan. Kami merekomendasikan kerja sama minimal 3 bulan untuk melihat pertumbuhan grafik performa konten yang matang."
+  },
+  {
+    question: "Apakah materi konten (video/foto) disediakan oleh klien?",
+    answer: "Tergantung kesepakatan. Pada tipe konten B-Roll aesthetic, tim kami dapat mengarahkan pengambilan aset video secara remote oleh tim internal Anda, atau kami memproses footage orisinal/stock berlisensi yang telah disiapkan sebelumnya."
+  },
+  {
+    question: "Berapa lama proses pembuatan konten hingga tayang?",
+    answer: "Proses perencanaan pilar konten, pembuatan skrip, desain carousel, dan video editing rata-rata membutuhkan waktu 7-10 hari kerja sebelum jadwal tayang perdana di bulan berjalan demi memastikan kualitas visual terbaik."
+  }
+];
+---
+
+<Layout>
+  <!-- Global navigation header -->
+  <Header client:load />
+
+  <main>
+    <!-- Sections -->
+    <Hero />
+    <Projects />
+    <Services />
+    <Pricing />
+    <SocialProof />
+    <Team />
+
+    <!-- Interactive FAQ Section -->
+    <section class="bg-background py-24 border-t border-foreground/5">
+      <div class="px-6 sm:px-12 lg:px-24 max-w-4xl mx-auto">
+        <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground text-center mb-16">
+          Pertanyaan Umum (FAQ)
+        </h2>
+        <FaqAccordion items={faqs} client:load />
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <Footer />
+</Layout>

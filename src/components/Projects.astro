@@ -1,0 +1,85 @@
+---
+const projects = [
+  {
+    num: "01",
+    title: "Obrolan Daging",
+    category: "Produksi Video",
+    desc: "Produksi konten video wawancara & talk show dengan visual berkualitas tinggi yang interaktif dan dinamis.",
+    color: "from-blue-600/10 to-purple-600/10"
+  },
+  {
+    num: "02",
+    title: "Tomoro Coffee Campaign",
+    category: "Analisis Konten & Strategi",
+    desc: "Pembedahan strategi marketing kreatif di balik campaign 'Aji Mumpung' untuk mendorong engagement maksimal.",
+    color: "from-amber-600/10 to-orange-600/10"
+  },
+  {
+    num: "03",
+    title: "Branding Correctly",
+    category: "Desain Edukatif",
+    desc: "Desain konten edukatif berbentuk microblog / carousel untuk membangun brand identity audiens secara terstruktur.",
+    color: "from-emerald-600/10 to-teal-600/10"
+  },
+  {
+    num: "04",
+    title: "Standar Film Production",
+    category: "Konten Sinematik",
+    desc: "Pembuatan konten media sosial dengan standar produksi sinematik demi menaikkan value brand di mata konsumen.",
+    color: "from-rose-600/10 to-indigo-600/10"
+  }
+];
+---
+
+<section id="projects" class="projects bg-background relative py-24 border-t border-white/5">
+  <!-- Marquee Header -->
+  <div class="pb-16 overflow-hidden select-none">
+    <div class="flex whitespace-nowrap marquee-track">
+      {Array(4).fill(0).map(() => (
+        <span class="shrink-0 text-[clamp(3.5rem,8vw,10rem)] font-extrabold tracking-tight text-foreground uppercase px-8">
+          Portofolio <span class="font-serif font-thin italic text-accent">Pilihan</span>
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <div class="flex flex-col divide-y divide-white/5">
+    {projects.map((proj) => (
+      <div class="group cursor-pointer py-16 md:py-24 hover:bg-white/[0.02] transition-colors duration-500">
+        <div class="mx-auto max-w-360 px-6 sm:px-12 lg:px-24 2xl:max-w-450 3xl:max-w-550">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:items-center">
+            
+            <!-- Image Frame -->
+            <div class="relative aspect-4/3 w-full overflow-hidden rounded-[2rem] md:col-span-7 bg-white/5 flex items-center justify-center border border-white/5 shadow-inner">
+              <div class={`absolute inset-0 bg-gradient-to-tr ${proj.color} opacity-40 group-hover:scale-105 transition-transform duration-700 ease-out`} />
+              <span class="text-white/10 font-mono text-8xl select-none group-hover:scale-110 transition-transform duration-700">{proj.num}</span>
+            </div>
+
+            <!-- Project Details -->
+            <div class="flex flex-col md:col-span-5 md:pl-8">
+              <span class="text-base font-semibold uppercase tracking-widest text-accent mb-4 font-mono">{proj.category}</span>
+              <h3 class="text-[clamp(2rem,3.5vw,4rem)] leading-[1.05] tracking-tight text-foreground mb-6 font-extrabold">
+                {proj.title}
+              </h3>
+              <p class="text-foreground/70 text-lg leading-relaxed max-w-md">
+                {proj.desc}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .marquee-track {
+    display: inline-flex;
+    animation: marquee 25s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>

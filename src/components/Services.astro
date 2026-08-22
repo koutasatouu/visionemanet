@@ -1,0 +1,64 @@
+---
+const services = [
+  {
+    title: "Pengalaman Digital",
+    desc: "Merancang website dan aplikasi web yang indah, cepat, dan berkonversi tinggi menggunakan teknologi modern.",
+  },
+  {
+    title: "Identitas Brand",
+    desc: "Mendesain logo, sistem desain, warna, tipografi, dan pedoman brand yang membuat bisnis Anda unik dan menonjol.",
+  },
+  {
+    title: "Arahan Kreatif",
+    desc: "Mengarahkan estetika kreatif kampanye iklan, konten media sosial, dan visual produk agar tepat sasaran.",
+  },
+  {
+    title: "Desain Produk",
+    desc: "Membuat prototipe, melakukan riset pengguna, wireframing, dan mengoptimalkan UI/UX platform digital Anda.",
+  },
+];
+---
+
+<section
+  id="services"
+  class="services relative bg-background overflow-hidden border-t border-white/5 py-24"
+>
+  <div
+    class="mx-auto max-w-360 px-6 sm:px-12 lg:px-24 2xl:max-w-450 3xl:max-w-550"
+  >
+    <!-- Large statement heading -->
+    <div
+      class="flex min-h-[40vh] items-center justify-center text-center py-12"
+    >
+      <h2
+        class="text-[clamp(2rem,5vw,5.5rem)] font-extrabold leading-[1.1] tracking-tight text-foreground max-w-4xl"
+      >
+        Kami merancang konten yang <span
+          class="font-serif italic text-muted-foreground/80 font-normal"
+          >memikat</span
+        >. Membangun brand yang <span
+          class="font-serif italic text-muted-foreground/80 font-normal"
+          >bertahan lama</span
+        >.
+      </h2>
+    </div>
+
+    <!-- Hover menu list -->
+    <div class="w-full mt-12 border-t border-white/10 divide-y divide-white/10">
+      {
+        services.map((svc) => (
+          <div class="group relative overflow-hidden transition-all duration-300">
+            <div class="flex flex-col md:flex-row md:items-center justify-between cursor-pointer px-4 py-8 sm:px-8 md:py-10 hover:bg-white/[0.02]">
+              <span class="text-[clamp(1.5rem,3vw,3.25rem)] font-light tracking-tight text-foreground transition-transform duration-300 group-hover:translate-x-2">
+                {svc.title}
+              </span>
+              <p class="mt-4 md:mt-0 text-foreground/60 max-w-md text-base leading-relaxed md:opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+                {svc.desc}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
