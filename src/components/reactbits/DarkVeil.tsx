@@ -69,9 +69,9 @@ void main(){
     vec4 col;mainImage(col,gl_FragCoord.xy);
     
     // Visionema brand color palette
-    vec3 colorBg = vec3(0.012, 0.016, 0.039);      // #00020aff
-    vec3 colorOrange = vec3(0.2, 0.467, 0.667);    // #3377aa
-    vec3 colorYellow = vec3(0.2, 0.667, 0.933);    // #33aaee 
+    vec3 colorBg = vec3(0.055, 0.059, 0.129);
+    vec3 colorOrange = vec3(0.2, 0.467, 0.667);
+    vec3 colorYellow = vec3(0.2, 0.667, 0.933);
     
     // Map CPPN pattern channels to create a smooth transition between theme colors
     vec3 themeCol = mix(colorBg, colorOrange, col.r * 0.85);

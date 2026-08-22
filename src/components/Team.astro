@@ -1,170 +1,147 @@
 ---
-import { Image } from 'astro:assets';
-import team1 from '../assets/team/team1.png';
-import team2 from '../assets/team/team2.png';
-import team3 from '../assets/team/team3.png';
-import team4 from '../assets/team/team4.png';
-import team5 from '../assets/team/team5.png';
-import team6 from '../assets/team/team6.png';
-import team7 from '../assets/team/team7.png';
+import { Image } from "astro:assets";
+import team1 from "../assets/team/team1.png";
+import team2 from "../assets/team/team2.png";
+import team3 from "../assets/team/team3.png";
+import team4 from "../assets/team/team4.png";
+import team5 from "../assets/team/team5.png";
+import team6 from "../assets/team/team6.png";
+import team7 from "../assets/team/team7.png";
 
 const team = [
   {
     name: "Sol",
     role: "Co-Founder / CEO",
-    tagline: "Mengarahkan visi bisnis dan menyusun strategi pertumbuhan brand jangka panjang.",
-    image: team1
+    tagline:
+      "Mengarahkan visi bisnis dan menyusun strategi pertumbuhan brand jangka panjang.",
+    image: team1,
   },
   {
     name: "Ame",
     role: "Creative Director",
-    tagline: "Arsitek ide kreatif di balik konsep konten visual yang estetis dan berkarakter.",
-    image: team2
+    tagline:
+      "Arsitek ide kreatif di balik konsep konten visual yang estetis dan berkarakter.",
+    image: team2,
   },
   {
     name: "Rian",
     role: "Director of Photography",
-    tagline: "Mengubah ide abstrak menjadi tangkapan visual sinematik kelas atas.",
-    image: team3
+    tagline:
+      "Mengubah ide abstrak menjadi tangkapan visual sinematik kelas atas.",
+    image: team3,
   },
   {
     name: "Aru",
     role: "Art Director",
-    tagline: "Menjaga konsistensi identitas visual dan estetika brand di setiap aset desain.",
-    image: team4
+    tagline:
+      "Menjaga konsistensi identitas visual dan estetika brand di setiap aset desain.",
+    image: team4,
   },
   {
     name: "Ari",
     role: "Lead Video Editor",
-    tagline: "Menyusun potongan klip menjadi alur cerita video dengan ritme dan transisi dinamis.",
-    image: team5
+    tagline:
+      "Menyusun potongan klip menjadi alur cerita video dengan ritme dan transisi dinamis.",
+    image: team5,
   },
   {
     name: "Bayu",
     role: "Social Media Manager",
-    tagline: "Menjaga interaksi audiens tetap aktif dan menganalisis performa data secara real-time.",
-    image: team6
+    tagline:
+      "Menjaga interaksi audiens tetap aktif dan menganalisis performa data secara real-time.",
+    image: team6,
   },
   {
     name: "Incun",
     role: "Lead Scriptwriter",
-    tagline: "Peracik hook pemikat dan penulisan skrip naratif yang menggerakkan audiens.",
-    image: team7
-  }
+    tagline:
+      "Peracik hook pemikat dan penulisan skrip naratif yang menggerakkan audiens.",
+    image: team7,
+  },
 ];
 ---
 
-<section id="about" class="py-24 bg-background relative overflow-hidden border-t border-white/5">
-  <div class="px-6 sm:px-12 lg:px-24 max-w-360 2xl:max-w-450 3xl:max-w-550 mx-auto relative z-10">
-    
+<section
+  id="about"
+  class="py-24 bg-background relative overflow-hidden border-t border-white/5"
+>
+  <div
+    class="px-6 sm:px-12 lg:px-24 max-w-360 2xl:max-w-450 3xl:max-w-550 mx-auto relative z-10"
+  >
     <!-- Section Header -->
     <div class="max-w-2xl mb-20">
-      <span class="text-xs uppercase font-mono tracking-widest text-accent font-bold">Orang-Orang di Balik Layar</span>
-      <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-foreground mt-4 leading-none">
+      <span
+        class="text-xs uppercase font-mono tracking-widest text-accent font-bold"
+        >Orang-Orang di Balik Layar</span
+      >
+      <h2
+        class="text-4xl sm:text-6xl font-extrabold tracking-tight text-foreground mt-4 leading-none"
+      >
         Tim Kreatif Kami
       </h2>
       <p class="text-foreground/70 text-lg sm:text-xl mt-6 leading-relaxed">
-        Kombinasi produser visual, penulis skrip, editor, dan analis data yang berkolaborasi untuk meroketkan kehadiran brand Anda.
+        Kombinasi produser visual, penulis skrip, editor, dan analis data yang
+        berkolaborasi untuk meroketkan kehadiran brand Anda.
       </p>
     </div>
 
     <!-- Team Carousel Layout -->
-    <div class="relative w-full overflow-hidden py-4 cursor-grab active:cursor-grabbing select-none mask-fade" id="team-carousel">
+    <div
+      class="relative w-full overflow-hidden py-4 cursor-grab active:cursor-grabbing select-none mask-fade"
+      id="team-carousel"
+    >
       <div class="flex gap-6 w-max" id="team-marquee-track">
         <!-- Group 1 -->
         <div class="flex gap-6 shrink-0">
-          {team.map((member) => (
-            <div class="group relative w-[280px] sm:w-[320px] shrink-0 rounded-[2rem] border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] p-4 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/5 hover:border-white/15 overflow-hidden">
-              
-              <!-- Image Container -->
-              <div class="relative aspect-[3/4] w-full overflow-hidden rounded-[1.5rem] bg-neutral-900 border border-white/5">
-                <Image 
-                  src={member.image} 
+          {
+            team.map((member) => (
+              <div class="w-[280px] sm:w-[320px] shrink-0 transition-transform duration-500 hover:-translate-y-2 p-3">
+                <Image
+                  src={member.image}
                   alt={member.name}
                   width={600}
                   height={800}
-                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                  class="w-full h-auto object-contain"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
               </div>
-
-              <!-- Description Container -->
-              <div class="pt-6 px-2 pb-2">
-                <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="text-2xl font-extrabold text-foreground tracking-tight group-hover:text-accent transition-colors duration-300">
-                    {member.name}
-                  </h3>
-                  <span class="text-xs font-mono font-bold tracking-widest text-accent/80 uppercase">
-                    {member.name.toLowerCase()}
-                  </span>
-                </div>
-                
-                <p class="text-sm font-semibold text-foreground/50 mt-1 uppercase tracking-wider font-mono">
-                  {member.role}
-                </p>
-                
-                <p class="text-sm text-foreground/70 mt-4 leading-relaxed line-clamp-3">
-                  {member.tagline}
-                </p>
-              </div>
-
-            </div>
-          ))}
+            ))
+          }
         </div>
-        
+
         <!-- Group 2 (Duplicate for infinite seamless loop) -->
         <div class="flex gap-6 shrink-0" aria-hidden="true">
-          {team.map((member) => (
-            <div class="group relative w-[280px] sm:w-[320px] shrink-0 rounded-[2rem] border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] p-4 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/5 hover:border-white/15 overflow-hidden">
-              
-              <!-- Image Container -->
-              <div class="relative aspect-[3/4] w-full overflow-hidden rounded-[1.5rem] bg-neutral-900 border border-white/5">
-                <Image 
-                  src={member.image} 
+          {
+            team.map((member) => (
+              <div class="w-[280px] sm:w-[320px] shrink-0 transition-transform duration-500 hover:-translate-y-2 p-3">
+                <Image
+                  src={member.image}
                   alt={member.name}
                   width={600}
                   height={800}
-                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                  class="w-full h-auto object-contain"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
               </div>
-
-              <!-- Description Container -->
-              <div class="pt-6 px-2 pb-2">
-                <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="text-2xl font-extrabold text-foreground tracking-tight group-hover:text-accent transition-colors duration-300">
-                    {member.name}
-                  </h3>
-                  <span class="text-xs font-mono font-bold tracking-widest text-accent/80 uppercase">
-                    {member.name.toLowerCase()}
-                  </span>
-                </div>
-                
-                <p class="text-sm font-semibold text-foreground/50 mt-1 uppercase tracking-wider font-mono">
-                  {member.role}
-                </p>
-                
-                <p class="text-sm text-foreground/70 mt-4 leading-relaxed line-clamp-3">
-                  {member.tagline}
-                </p>
-              </div>
-
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- Decorative blur element -->
-  <div class="absolute right-0 bottom-0 w-96 h-96 bg-accent/5 rounded-full filter blur-[120px] pointer-events-none z-0"></div>
-  <div class="absolute left-0 top-1/2 -translate-y-1/2 w-80 h-80 bg-blue-500/5 rounded-full filter blur-[100px] pointer-events-none z-0"></div>
+  <div
+    class="absolute right-0 bottom-0 w-96 h-96 bg-accent/5 rounded-full filter blur-[120px] pointer-events-none z-0"
+  >
+  </div>
+  <div
+    class="absolute left-0 top-1/2 -translate-y-1/2 w-80 h-80 bg-blue-500/5 rounded-full filter blur-[100px] pointer-events-none z-0"
+  >
+  </div>
 </section>
 
 <script>
-  const carousel = document.getElementById('team-carousel');
-  const track = document.getElementById('team-marquee-track');
+  const carousel = document.getElementById("team-carousel");
+  const track = document.getElementById("team-marquee-track");
 
   if (carousel && track) {
     const activeTrack = track;
@@ -180,16 +157,16 @@ const team = [
     let velocity = 0;
     let lastX = 0;
 
-    carousel.addEventListener('mouseenter', () => {
+    carousel.addEventListener("mouseenter", () => {
       isHovered = true;
     });
 
-    carousel.addEventListener('mouseleave', () => {
+    carousel.addEventListener("mouseleave", () => {
       isHovered = false;
     });
 
     // Mouse events
-    carousel.addEventListener('mousedown', (e) => {
+    carousel.addEventListener("mousedown", (e) => {
       isDragging = true;
       startX = e.clientX;
       dragStartPosition = position;
@@ -197,7 +174,7 @@ const team = [
       velocity = 0;
     });
 
-    window.addEventListener('mousemove', (e) => {
+    window.addEventListener("mousemove", (e) => {
       if (!isDragging) return;
       const deltaX = e.clientX - startX;
       velocity = e.clientX - lastX;
@@ -205,12 +182,12 @@ const team = [
       position = dragStartPosition + deltaX;
     });
 
-    window.addEventListener('mouseup', () => {
+    window.addEventListener("mouseup", () => {
       isDragging = false;
     });
 
     // Touch events
-    carousel.addEventListener('touchstart', (e) => {
+    carousel.addEventListener("touchstart", (e) => {
       isDragging = true;
       startX = e.touches[0].clientX;
       dragStartPosition = position;
@@ -218,7 +195,7 @@ const team = [
       velocity = 0;
     });
 
-    carousel.addEventListener('touchmove', (e) => {
+    carousel.addEventListener("touchmove", (e) => {
       if (!isDragging) return;
       const deltaX = e.touches[0].clientX - startX;
       velocity = e.touches[0].clientX - lastX;
@@ -226,7 +203,7 @@ const team = [
       position = dragStartPosition + deltaX;
     });
 
-    carousel.addEventListener('touchend', () => {
+    carousel.addEventListener("touchend", () => {
       isDragging = false;
     });
 
@@ -270,7 +247,19 @@ const team = [
 <style>
   /* Optional fade mask on sides for premium look */
   .mask-fade {
-    mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      white 10%,
+      white 90%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      white 10%,
+      white 90%,
+      transparent
+    );
   }
 </style>
