@@ -111,13 +111,17 @@ const team = [
 
       <!-- Carousel Container -->
       <div
-        class="overflow-hidden py-4 select-none mask-fade"
+        class="overflow-hidden py-4 select-none relative"
         id="team-carousel"
       >
+        <!-- Fade Overlays (Hardware-friendly gradient overlays instead of CSS mask-image) -->
+        <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
+
         <div 
           class="flex gap-6 transition-transform duration-500 ease-out" 
           id="team-track"
-          style="transform: translateX(0px);"
+          style="transform: translate3d(0px, 0px, 0px);"
         >
           {
             team.map((member) => (
@@ -183,7 +187,8 @@ const team = [
       const gap = 24; // gap-6 is 24px
       const offset = currentIndex * (itemWidth + gap);
       
-      track.style.transform = `translateX(-${offset}px)`;
+      // Use translate3d to force hardware acceleration on iOS Safari
+      track.style.transform = `translate3d(-${offset}px, 0px, 0px)`;
 
       // Enable/disable navigation buttons based on position
       if (currentIndex === 0) {
@@ -234,22 +239,10 @@ const team = [
 </script>
 
 <style>
-  /* Optional fade mask on sides for premium look */
-  .mask-fade {
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      white 10%,
-      white 90%,
-      transparent
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      white 10%,
-      white 90%,
-      transparent
-    );
+  #team-track {
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   /* Only apply hover styles on devices that support hover (e.g. desktop) to prevent iOS tapping freeze */
