@@ -121,7 +121,7 @@ const team = [
         >
           {
             team.map((member) => (
-              <div class="w-full sm:w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] shrink-0 transition-transform duration-500 hover:-translate-y-2 p-3">
+              <div class="team-card w-full sm:w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] shrink-0 p-3">
                 <Image
                   src={member.image}
                   alt={member.name}
@@ -250,5 +250,15 @@ const team = [
       white 90%,
       transparent
     );
+  }
+
+  /* Only apply hover styles on devices that support hover (e.g. desktop) to prevent iOS tapping freeze */
+  @media (hover: hover) {
+    .team-card {
+      transition: transform 0.5s ease;
+    }
+    .team-card:hover {
+      transform: translateY(-8px);
+    }
   }
 </style>
