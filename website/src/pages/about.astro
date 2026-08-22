@@ -1,0 +1,89 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { t, type Lang } from '../i18n/translations';
+import FinalCTA from '../components/FinalCTA.astro';
+const lang: Lang = 'id';
+
+const values = [
+  { key: 'v1', color: '#33CCFF' },
+  { key: 'v2', color: '#FFCC00' },
+  { key: 'v3', color: '#EF2A2A' },
+] as const;
+---
+<MainLayout title="Tentang · Visionema.net" description="Agensi media sosial dari Magelang. Kami bantu brand tumbuh lewat konten yang jujur & strategi yang masuk akal." lang={lang} path="/about">
+
+  <section class="section about-hero">
+    <div class="container">
+      <span class="eyebrow">{t.about.kicker[lang]}</span>
+      <h1 class="about-title">{t.about.heroTitle[lang]}</h1>
+    </div>
+  </section>
+
+  <section class="section about-intro">
+    <div class="container about-intro-grid">
+      <p class="about-intro-p">{t.about.intro[lang]}</p>
+      <div class="about-side">
+        <div class="pill">✦ Start, Grow, Win!</div>
+        <div class="pill" style="background:#FFCC00;color:#0B0F1A">Magelang · Indonesia</div>
+        <div class="pill" style="background:#33CCFF;color:#0B0F1A">@visionema_net</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-values">
+    <div class="container">
+      <h2 class="about-vh">{t.about.values[lang]}</h2>
+      <div class="values-grid">
+        {values.map((v) => (
+          <div class="val" style={`--acc:${v.color}`}>
+            <div class="val-mark">✦</div>
+            <div class="val-name">{t.about[`${v.key}t` as 'v1t' | 'v2t' | 'v3t'][lang]}</div>
+            <div class="val-desc">{t.about[`${v.key}d` as 'v1d' | 'v2d' | 'v3d'][lang]}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-signal">
+    <div class="container">
+      <div class="signal-big">
+        {lang === 'id' ? (
+          <>Kami bukan agensi <em>corporate</em>.<br/>Kami tim kreatif yang<br/>ngerti <em>sosial</em>.</>
+        ) : (
+          <>We're not a <em>corporate</em> agency.<br/>We're a creative team<br/>who gets <em>social</em>.</>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA lang={lang} />
+</MainLayout>
+
+<style>
+  .about-hero { padding-top: 80px; background: linear-gradient(180deg, #0B0F1A, #14192A); }
+  .about-title { font-size: clamp(48px, 11vw, 180px); letter-spacing: -0.04em; white-space: pre-line; line-height: 0.9; margin-top: 20px; }
+  .about-intro { background: var(--brand-ink); }
+  .about-intro-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: end; }
+  .about-intro-p { font-family: var(--font-serif); font-size: clamp(24px, 3vw, 40px); font-weight: 400; letter-spacing: -0.01em; line-height: 1.25; }
+  .about-intro-p em { color: var(--brand-yellow); }
+  .about-side { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .pill { display: inline-block; padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,0.06); font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+
+  .about-values { background: var(--brand-blue-deep); }
+  .about-vh { font-size: clamp(32px, 5vw, 60px); margin-bottom: 30px; }
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .val { padding: 30px; border-radius: 24px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--acc); }
+  .val-mark { font-size: 28px; color: var(--acc); }
+  .val-name { font-family: var(--font-display); font-weight: 700; font-size: 32px; margin-top: 12px; letter-spacing: -0.02em; }
+  .val-desc { margin-top: 8px; opacity: 0.75; font-size: 15px; }
+
+  .about-signal { background: var(--brand-ink); }
+  .signal-big { font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 7vw, 100px); line-height: 1.02; letter-spacing: -0.03em; }
+  .signal-big em { font-family: var(--font-serif); font-weight: 400; font-style: italic; color: var(--brand-yellow); }
+
+  @media (max-width: 900px) {
+    .about-intro-grid { grid-template-columns: 1fr; gap: 30px; }
+    .values-grid { grid-template-columns: 1fr; }
+  }
+</style>

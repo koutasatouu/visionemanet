@@ -1,0 +1,52 @@
+---
+import { t, type Lang } from '../i18n/translations';
+import { services } from '../data/services';
+export interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const prefix = lang === 'en' ? '/en' : '';
+---
+<section class="section svc">
+  <div class="container svc-head">
+    <span class="eyebrow">{t.services.label[lang]}</span>
+    <h2 class="svc-title">{t.services.title[lang]}</h2>
+  </div>
+  <div class="container">
+    <div class="svc-list">
+      {services.map((s) => (
+        <a href={prefix + '/services#' + s.id} class="svc-row" data-testid={`svc-row-${s.id}`}>
+          <div class="svc-num" style={`color:${s.accent}`}>{s.number}</div>
+          <div class="svc-body">
+            <div class="svc-name">{s.title[lang]}</div>
+            <div class="svc-tag">{s.tagline[lang]}</div>
+          </div>
+          <div class="svc-tags">
+            {s.tags.map((tg) => <span class="chip">{tg}</span>)}
+          </div>
+          <div class="svc-arrow" style={`background:${s.accent}`}>→</div>
+        </a>
+      ))}
+    </div>
+    <a href={prefix + '/services'} class="btn btn-ghost svc-all">{t.services.cta[lang]} →</a>
+  </div>
+</section>
+
+<style>
+  .svc { background: var(--brand-ink); }
+  .svc-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+  .svc-title { font-size: clamp(36px, 6vw, 80px); white-space: pre-line; }
+  .svc-list { border-top: 1px solid rgba(255,255,255,0.1); }
+  .svc-row { display: grid; grid-template-columns: 60px 1.4fr 1fr 60px; gap: 24px; align-items: center; padding: 28px 8px; border-bottom: 1px solid rgba(255,255,255,0.1); transition: background .3s, padding .3s; }
+  .svc-row:hover { background: rgba(255,255,255,0.02); padding-left: 20px; padding-right: 20px; }
+  .svc-num { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
+  .svc-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(26px, 3vw, 42px); letter-spacing: -0.02em; }
+  .svc-tag { color: rgba(255,255,255,0.6); margin-top: 6px; font-size: 15px; }
+  .svc-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+  .chip { padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); font-family: var(--font-display); font-size: 12px; letter-spacing: 0.02em; }
+  .svc-arrow { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0B0F1A; font-weight: 700; transition: transform .3s; }
+  .svc-row:hover .svc-arrow { transform: rotate(-45deg); }
+  .svc-all { margin-top: 40px; }
+  @media (max-width: 720px) {
+    .svc-row { grid-template-columns: auto 1fr auto; gap: 14px; padding: 20px 4px; }
+    .svc-tags { display: none; }
+  }
+</style>

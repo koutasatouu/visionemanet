@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import StickyMobileCTA from '../components/StickyMobileCTA.astro';
+import { SITE } from '../config';
+import type { Lang } from '../i18n/translations';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  lang?: Lang;
+  path?: string;
+}
+
+const {
+  title = `${SITE.name} — Social Media Management & Creative Agency`,
+  description = SITE.description,
+  lang = 'id',
+  path = '/',
+} = Astro.props;
+---
+<!doctype html>
+<html lang={lang === 'id' ? 'id' : 'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B0F1A" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(path, Astro.site || 'https://visionema.net').toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={new URL(path, Astro.site || 'https://visionema.net').toString()} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body data-lang={lang}>
+    <Navbar lang={lang} path={path} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <StickyMobileCTA lang={lang} />
+    <script>
+      // Simple reveal-on-scroll
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      // Language toggle: rewrites path prefix
+      window.addEventListener('click', (ev) => {
+        const target = (ev.target as HTMLElement)?.closest('[data-lang-switch]');
+        if (!target) return;
+        ev.preventDefault();
+        const to = target.getAttribute('data-lang-switch') as 'id' | 'en';
+        const path = location.pathname;
+        let next = path;
+        if (to === 'en') {
+          if (!path.startsWith('/en')) next = '/en' + (path === '/' ? '' : path);
+        } else {
+          next = path.replace(/^\/en/, '') || '/';
+        }
+        location.href = next;
+      });
+    </script>
+  </body>
+</html>

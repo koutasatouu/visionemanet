@@ -1,0 +1,61 @@
+---
+import { t, type Lang } from '../i18n/translations';
+import { works } from '../data/works';
+export interface Props { lang: Lang; limit?: number; }
+const { lang, limit = 4 } = Astro.props;
+const prefix = lang === 'en' ? '/en' : '';
+const items = works.slice(0, limit);
+---
+<section class="section featured-work">
+  <div class="container fw-head">
+    <div>
+      <span class="eyebrow">{t.featured.label[lang]}</span>
+      <h2 class="fw-title">{t.featured.title[lang]}</h2>
+    </div>
+    <a href={prefix + '/works'} class="btn btn-ghost fw-btn" data-testid="featured-see-all">{t.featured.cta[lang]} →</a>
+  </div>
+
+  <div class="container">
+    <div class="fw-grid">
+      {items.map((w, i) => (
+        <a href={prefix + '/works'} class:list={["fw-card", `fw-size-${w.size}`]} data-testid={`work-card-${w.id}`}>
+          <div class="fw-img" style={`background-image:url(${w.image})`}>
+            <span class="fw-tag" style={`background:${w.accent};color:${w.accent === '#FFCC00' ? '#0B0F1A' : '#fff'}`}>{String(i + 1).padStart(2, '0')}</span>
+            {w.isPlaceholder && <span class="fw-holder">Placeholder · replace with client visual</span>}
+          </div>
+          <div class="fw-meta">
+            <div class="fw-client">{w.client}</div>
+            <div class="fw-service">{w.service[lang]} · {w.year}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fw-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 40px; }
+  .fw-title { font-size: clamp(36px, 6vw, 80px); white-space: pre-line; letter-spacing: -0.03em; }
+  .fw-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .fw-card { position: relative; display: block; transition: transform .3s; }
+  .fw-card:hover { transform: translateY(-4px); }
+  .fw-card:hover .fw-img { transform: scale(1.02); }
+  .fw-size-tall { grid-row: span 2; }
+  .fw-size-wide { grid-column: span 2; }
+  .fw-img { position: relative; background-size: cover; background-position: center; background-color: #1E56E8; border-radius: 24px; aspect-ratio: 4 / 5; overflow: hidden; transition: transform .4s cubic-bezier(.2,.6,.2,1); }
+  .fw-size-tall .fw-img { aspect-ratio: 4 / 6.4; }
+  .fw-size-wide .fw-img { aspect-ratio: 16 / 9; }
+  .fw-size-square .fw-img { aspect-ratio: 1 / 1; }
+  .fw-tag { position: absolute; top: 14px; left: 14px; padding: 6px 12px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 0.08em; }
+  .fw-holder { position: absolute; bottom: 14px; left: 14px; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,0.6); color: #fff; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .fw-meta { padding: 12px 4px 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .fw-client { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+  .fw-service { font-size: 13px; opacity: 0.55; }
+  @media (max-width: 900px) {
+    .fw-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .fw-size-wide { grid-column: span 2; }
+    .fw-size-tall { grid-row: span 1; }
+    .fw-title { font-size: clamp(32px, 9vw, 56px); }
+    .fw-head { align-items: flex-start; flex-direction: column; gap: 16px; }
+  }
+</style>

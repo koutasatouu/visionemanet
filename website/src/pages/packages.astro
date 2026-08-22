@@ -1,0 +1,63 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Packages from '../components/Packages.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import { t, type Lang } from '../i18n/translations';
+const lang: Lang = 'id';
+---
+<MainLayout title="Paket · Visionema.net" description="Tiga paket social media management: Mulai Aja Dulu, Level Up, dan Scale Up. Pilih level pertumbuhan brand-mu." lang={lang} path="/packages">
+
+  <section class="section pkg-hero">
+    <div class="container">
+      <span class="eyebrow">{t.packages.label[lang]}</span>
+      <h1 class="pkg-hero-title">{t.packages.title[lang]}</h1>
+      <p class="pkg-hero-sub">
+        {lang === 'id'
+          ? 'Semua paket sudah termasuk kurasi konten, planning bulanan, dan handling akun. Pilih yang paling cocok sama fase brand-mu.'
+          : 'Every plan includes content curation, monthly planning, and account handling. Pick the one that fits your stage.'}
+      </p>
+    </div>
+  </section>
+
+  <Packages lang={lang} compact={false} />
+
+  <section class="section pkg-faq">
+    <div class="container">
+      <h2 class="pkg-faq-title">{lang === 'id' ? 'Sering ditanyain.' : 'Frequently asked.'}</h2>
+      <div class="faq-list">
+        <details class="faq" open>
+          <summary>{lang === 'id' ? 'Aku bisa mulai kapan saja?' : 'When can I start?'}</summary>
+          <p>{lang === 'id' ? 'Bisa banget. Onboarding rata-rata 3–5 hari kerja setelah brief masuk.' : 'Absolutely. Onboarding averages 3–5 business days after the brief.'}</p>
+        </details>
+        <details class="faq">
+          <summary>{lang === 'id' ? 'Boleh upgrade paket di tengah jalan?' : 'Can I upgrade mid-way?'}</summary>
+          <p>{lang === 'id' ? 'Boleh. Ambil paket kecil dulu, upgrade begitu momentum-nya kelihatan.' : "Yes. Start small, upgrade once you see momentum."}</p>
+        </details>
+        <details class="faq">
+          <summary>{lang === 'id' ? 'Konten bisa disesuaikan sama brand aku?' : 'Can content match my brand?'}</summary>
+          <p>{lang === 'id' ? 'Tentu. Semua paket dimulai dari brand strategy — bukan template.' : "For sure. Every plan starts from brand strategy — no templates."}</p>
+        </details>
+        <details class="faq">
+          <summary>{lang === 'id' ? 'Bagaimana pembayarannya?' : 'How does payment work?'}</summary>
+          <p>{lang === 'id' ? 'Transfer bank / e-wallet, dibayar di depan tiap bulan. Detail lengkap dikirim setelah chat WhatsApp.' : "Bank transfer / e-wallet, paid monthly upfront. Details after we chat on WhatsApp."}</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA lang={lang} />
+</MainLayout>
+
+<style>
+  .pkg-hero { background: linear-gradient(180deg, #0B0F1A, #14192A); }
+  .pkg-hero-title { font-size: clamp(48px, 9vw, 130px); letter-spacing: -0.03em; white-space: pre-line; margin-top: 16px; }
+  .pkg-hero-sub { max-width: 640px; margin-top: 20px; opacity: 0.7; font-size: 17px; }
+  .pkg-faq { background: var(--brand-blue-deep); }
+  .pkg-faq-title { font-size: clamp(36px, 6vw, 72px); margin-bottom: 30px; }
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq { border-radius: 20px; padding: 22px 26px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+  .faq summary { font-family: var(--font-display); font-weight: 700; font-size: 20px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq summary::after { content: '+'; font-size: 32px; opacity: 0.5; }
+  .faq[open] summary::after { content: '−'; }
+  .faq p { margin: 14px 0 0; opacity: 0.75; }
+</style>

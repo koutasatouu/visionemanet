@@ -1,0 +1,18 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FeaturedWork from '../../components/FeaturedWork.astro';
+import ServicesList from '../../components/ServicesList.astro';
+import Packages from '../../components/Packages.astro';
+import SocialProof from '../../components/SocialProof.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+const lang = 'en';
+---
+<MainLayout title="Visionema.net — Social Media Management & Creative Agency" description="Social media management, content, and creative strategy for brands that want to grow. Visionema.net from Magelang." lang={lang} path="/en/">
+  <Hero lang={lang} />
+  <FeaturedWork lang={lang} limit={4} />
+  <ServicesList lang={lang} />
+  <Packages lang={lang} compact={true} />
+  <SocialProof lang={lang} />
+  <FinalCTA lang={lang} />
+</MainLayout>

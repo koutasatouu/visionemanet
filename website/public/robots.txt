@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://visionema.net/sitemap-index.xml

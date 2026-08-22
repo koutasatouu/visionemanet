@@ -1,0 +1,97 @@
+---
+import { t, type Lang } from '../i18n/translations';
+import { packages } from '../data/packages';
+import { waLink } from '../config';
+
+export interface Props { lang: Lang; compact?: boolean; }
+const { lang, compact = false } = Astro.props;
+const prefix = lang === 'en' ? '/en' : '';
+---
+<section class="section pkg">
+  <div class="pkg-banner container">
+    <div class="pkg-banner-inner">{t.packages.monthly[lang]}</div>
+  </div>
+
+  <div class="container pkg-head">
+    <span class="eyebrow">{t.packages.label[lang]}</span>
+    <h2 class="pkg-title">{t.packages.title[lang]}</h2>
+  </div>
+
+  <div class="container">
+    <div class="pkg-grid">
+      {packages.map((p) => (
+        <article class:list={["pkg-card", { rec: p.recommended }]} data-testid={`pkg-card-${p.id}`}>
+          {p.recommended && <span class="pkg-rec" data-testid="pkg-recommended">★ {t.packages.recommended[lang]}</span>}
+          <div class="pkg-name">{p.name}</div>
+          <div class="pkg-price-wrap">
+            <span class="pkg-price" style={`background:${p.color};color:${p.color === '#FFCC00' || p.color === '#33CCFF' ? '#0B0F1A' : '#fff'}`}>{p.price}</span>
+          </div>
+          <div class="pkg-pos">{p.positioning[lang]}</div>
+
+          {!compact && p.groups.map((g) => (
+            <div class="pkg-group">
+              <div class="pkg-g-title" style={`color:${p.color}`}>{g.title[lang]}</div>
+              <ul class="pkg-list">
+                {g.items.map((it) => (
+                  <li class:list={["pkg-li", { off: !it.included }]}>
+                    <span class="pkg-mark" style={it.included ? `background:${p.color};color:${p.color === '#FFCC00' || p.color === '#33CCFF' ? '#0B0F1A' : '#fff'}` : ''}>{it.included ? '✓' : '✕'}</span>
+                    <span>{it.label[lang]}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {compact && (
+            <ul class="pkg-list pkg-compact">
+              {p.groups[0].items.filter((i) => i.included).slice(0, 3).map((it) => (
+                <li class="pkg-li"><span class="pkg-mark" style={`background:${p.color};color:${p.color === '#FFCC00' || p.color === '#33CCFF' ? '#0B0F1A' : '#fff'}`}>✓</span><span>{it.label[lang]}</span></li>
+              ))}
+              <li class="pkg-more">+ {p.groups[2].items.filter((i) => i.included).length} {lang === 'id' ? 'topping lain' : 'more toppings'}</li>
+            </ul>
+          )}
+
+          <a
+            href={waLink(`Halo Visionema! Aku tertarik dengan paket ${p.name} (${p.price}). Boleh ngobrol?`)}
+            target="_blank" rel="noopener"
+            class:list={["btn pkg-cta", p.recommended ? "btn-primary" : "btn-dark"]}
+            data-testid={`pkg-cta-${p.id}`}
+          >
+            {t.packages.cta[lang]} →
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {compact && (
+      <div class="pkg-full">
+        <a href={prefix + '/packages'} class="btn btn-ghost" data-testid="pkg-full-cta">{t.packages.fullCta[lang]} →</a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .pkg { background: linear-gradient(180deg, var(--brand-ink) 0%, var(--brand-blue-deep) 100%); }
+  .pkg-banner { margin-bottom: 40px; }
+  .pkg-banner-inner { background: var(--brand-red); padding: 22px 30px; border-radius: 16px; text-align: center; font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 4vw, 40px); letter-spacing: -0.02em; white-space: pre-line; transform: rotate(-1deg); box-shadow: 0 20px 60px rgba(239,42,42,0.35); }
+  .pkg-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; align-items: flex-start; }
+  .pkg-title { font-size: clamp(36px, 6vw, 72px); white-space: pre-line; }
+  .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+  .pkg-card { background: var(--brand-cream); color: var(--brand-ink); border-radius: 24px; padding: 34px 28px; position: relative; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+  .pkg-card.rec { background: #FFF9DE; transform: translateY(-14px); box-shadow: 0 30px 70px rgba(255,204,0,0.28), 0 0 0 2px #FFCC00 inset; }
+  .pkg-rec { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #0B0F1A; color: #FFCC00; padding: 6px 14px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 0.12em; }
+  .pkg-name { font-family: var(--font-display); font-weight: 700; font-size: 28px; letter-spacing: -0.02em; }
+  .pkg-price { display: inline-block; padding: 8px 18px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 24px; }
+  .pkg-pos { font-weight: 700; opacity: 0.8; margin-bottom: 8px; }
+  .pkg-group { padding-top: 6px; }
+  .pkg-g-title { font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; }
+  .pkg-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .pkg-li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.4; }
+  .pkg-li.off { text-decoration: line-through; opacity: 0.4; }
+  .pkg-mark { width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; background: rgba(0,0,0,0.08); flex-shrink: 0; margin-top: 2px; }
+  .pkg-more { padding-left: 30px; font-size: 13px; opacity: 0.6; font-style: italic; }
+  .pkg-cta { justify-content: center; margin-top: 10px; }
+  .pkg-full { margin-top: 40px; display: flex; justify-content: center; }
+  @media (max-width: 900px) { .pkg-grid { grid-template-columns: 1fr; } .pkg-card.rec { transform: none; } }
+</style>

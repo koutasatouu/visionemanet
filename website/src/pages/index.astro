@@ -1,0 +1,18 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import FeaturedWork from '../components/FeaturedWork.astro';
+import ServicesList from '../components/ServicesList.astro';
+import Packages from '../components/Packages.astro';
+import SocialProof from '../components/SocialProof.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+const lang = 'id';
+---
+<MainLayout title="Visionema.net — Agensi Media Sosial & Konten Kreatif" description="Kelola sosmed, bikin konten, dan atur strategi kreatif buat brand yang mau tumbuh. Visionema.net dari Magelang." lang={lang} path="/">
+  <Hero lang={lang} />
+  <FeaturedWork lang={lang} limit={4} />
+  <ServicesList lang={lang} />
+  <Packages lang={lang} compact={true} />
+  <SocialProof lang={lang} />
+  <FinalCTA lang={lang} />
+</MainLayout>

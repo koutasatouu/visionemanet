@@ -1,0 +1,55 @@
+---
+import { t, type Lang } from '../i18n/translations';
+import { SITE, waLink } from '../config';
+export interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const prefix = lang === 'en' ? '/en' : '';
+---
+<footer class="foot" data-testid="site-footer">
+  <div class="container foot-top">
+    <div class="foot-brand">
+      <div class="foot-word">Start,<br/>Grow,<br/><span class="yellow">Win!</span></div>
+      <p class="foot-tag">{t.footer.tagline[lang]}</p>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <div class="foot-h">Menu</div>
+        <a href={prefix + '/'}>{t.nav.home[lang]}</a>
+        <a href={prefix + '/services'}>{t.nav.services[lang]}</a>
+        <a href={prefix + '/works'}>{t.nav.works[lang]}</a>
+        <a href={prefix + '/packages'}>{t.nav.packages[lang]}</a>
+        <a href={prefix + '/about'}>{t.nav.about[lang]}</a>
+        <a href={prefix + '/contact'}>{t.nav.contact[lang]}</a>
+      </div>
+      <div>
+        <div class="foot-h">Contact</div>
+        <a href={waLink()} target="_blank" rel="noopener" data-testid="footer-whatsapp">WhatsApp</a>
+        <a href={SITE.instagram} target="_blank" rel="noopener" data-testid="footer-instagram">Instagram · @visionema_net</a>
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <div class="muted">{SITE.location}</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bar container">
+    <span>{t.footer.copyright[lang]}</span>
+    <span>Made in Magelang · ✦</span>
+  </div>
+<style>
+  .foot { background: var(--brand-blue-deep); color: #fff; padding: 80px 0 24px; position: relative; overflow: hidden; }
+  .foot::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 0%, rgba(51,204,255,0.15), transparent 50%); pointer-events: none; }
+  .foot-top { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; position: relative; }
+  .foot-word { font-family: var(--font-display); font-size: clamp(48px, 9vw, 110px); font-weight: 700; line-height: 0.92; letter-spacing: -0.03em; }
+  .foot-word .yellow { color: var(--brand-yellow); font-style: italic; font-family: var(--font-serif); }
+  .foot-tag { margin-top: 20px; opacity: 0.7; max-width: 320px; }
+  .foot-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .foot-h { font-family: var(--font-display); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.5; margin-bottom: 16px; }
+  .foot-cols a { display: block; padding: 6px 0; font-size: 15px; opacity: 0.85; }
+  .foot-cols a:hover { color: var(--brand-yellow); }
+  .muted { opacity: 0.5; padding: 6px 0; font-size: 14px; }
+  .foot-bar { margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; opacity: 0.6; flex-wrap: wrap; gap: 12px; }
+  @media (max-width: 720px) {
+    .foot-top { grid-template-columns: 1fr; gap: 40px; }
+    .foot-cols { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</footer>

@@ -1,0 +1,154 @@
+---
+import { t, type Lang } from '../i18n/translations';
+import { SITE, waLink } from '../config';
+
+export interface Props { lang: Lang; path: string; }
+const { lang, path } = Astro.props;
+const prefix = lang === 'en' ? '/en' : '';
+
+const links = [
+  { href: `${prefix}/`, key: 'home' as const },
+  { href: `${prefix}/services`, key: 'services' as const },
+  { href: `${prefix}/works`, key: 'works' as const },
+  { href: `${prefix}/packages`, key: 'packages' as const },
+  { href: `${prefix}/about`, key: 'about' as const },
+  { href: `${prefix}/contact`, key: 'contact' as const },
+];
+---
+<header class="nav" data-testid="site-navbar">
+  <div class="nav-inner">
+    <a href={prefix + '/'} class="brand" data-testid="brand-logo" aria-label="Visionema.net home">
+      <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M8 6 L20 34 L32 6 L26 6 L20 22 L14 6 Z" fill="#33CCFF"/>
+        <path d="M14 6 L20 22 L26 6 L20 12 Z" fill="#1E56E8"/>
+      </svg>
+      <span class="brand-word">VISIONEMA<span class="dot">.</span>NET</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          class:list={["nav-link", { active: (path === '/' && l.key === 'home') || (l.key !== 'home' && path.includes(l.key)) }]}
+          data-testid={`nav-${l.key}`}
+        >
+          {t.nav[l.key][lang]}
+        </a>
+      ))}
+    </nav>
+
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-lang-switch="id" data-testid="lang-id" class:list={["lang-btn", { on: lang === 'id' }]}>ID</button>
+        <span aria-hidden="true">/</span>
+        <button data-lang-switch="en" data-testid="lang-en" class:list={["lang-btn", { on: lang === 'en' }]}>EN</button>
+      </div>
+      <a href={waLink()} target="_blank" rel="noopener" class="btn btn-primary nav-cta" data-testid="nav-cta">
+        {t.nav.cta[lang]} <span aria-hidden="true">→</span>
+      </a>
+      <button class="burger" aria-label="Menu" data-testid="nav-burger" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-testid="mobile-menu">
+    <div class="mobile-inner">
+      {links.map((l) => (
+        <a href={l.href} class="mobile-link" data-testid={`mobile-nav-${l.key}`}>{t.nav[l.key][lang]}</a>
+      ))}
+      <div class="mobile-foot">
+        <a href={waLink()} target="_blank" rel="noopener" class="btn btn-primary" data-testid="mobile-nav-cta">{t.nav.cta[lang]} →</a>
+        <div class="lang-switch">
+          <button data-lang-switch="id" class:list={["lang-btn", { on: lang === 'id' }]}>ID</button>
+          <span>/</span>
+          <button data-lang-switch="en" class:list={["lang-btn", { on: lang === 'en' }]}>EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const b = document.getElementById('burger');
+  const m = document.getElementById('mobile-menu');
+  b?.addEventListener('click', () => {
+    m?.classList.toggle('open');
+    b.classList.toggle('open');
+    document.body.style.overflow = m?.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-link').forEach((el) => el.addEventListener('click', () => {
+    m?.classList.remove('open');
+    b?.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11,15,26,0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 14px var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+  .brand-word .dot { color: var(--brand-yellow); }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-link {
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    transition: color .2s, background .2s;
+  }
+  .nav-link:hover { color: #fff; background: rgba(255,255,255,0.06); }
+  .nav-link.active { color: var(--brand-ink); background: var(--brand-cyan); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.08em; opacity: 0.7; }
+  .lang-btn { padding: 4px 6px; }
+  .lang-btn.on { color: var(--brand-yellow); font-weight: 700; opacity: 1; }
+  .nav-cta { padding: 10px 18px; font-size: 13px; }
+  .burger { display: none; width: 40px; height: 40px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
+  .burger span { width: 22px; height: 2px; background: #fff; transition: transform .3s, opacity .3s; border-radius: 2px; }
+  .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .lang-switch:not(.mobile-foot .lang-switch) { display: none; }
+    .burger { display: flex; }
+    .mobile-menu { position: fixed; top: 60px; left: 0; right: 0; height: calc(100dvh - 60px); background: var(--brand-ink); z-index: 49; display: block; transform: translateY(-110%); transition: transform .35s cubic-bezier(.7,0,.3,1); }
+    .mobile-menu.open { transform: none; }
+    .mobile-inner { padding: 40px 24px; display: flex; flex-direction: column; gap: 4px; height: 100%; }
+    .mobile-link { font-family: var(--font-display); font-size: 34px; font-weight: 700; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .mobile-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 24px; }
+    .mobile-foot .lang-switch { opacity: 1; }
+  }
+</style>
