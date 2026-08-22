@@ -34,7 +34,10 @@ const {
   <body
     class="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-accent selection:text-white"
   >
-    <slot />
+    <!-- App Wrapper for horizontal overflow containment without breaking body scroll container -->
+    <div id="page-wrapper" class="relative w-full overflow-x-hidden min-h-screen">
+      <slot />
+    </div>
   </body>
 </html>
 
@@ -139,6 +142,7 @@ const {
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     infinite: false,
+    syncTouch: false,
   });
 
   function raf(time: number) {

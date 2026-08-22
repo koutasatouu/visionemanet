@@ -10,7 +10,7 @@ import VisionemaLogo from "./VisionemaLogo.tsx";
 >
   <div class="absolute inset-0 z-0">
     <DarkVeil
-      client:load
+      client:visible
       speed={0.2}
       noiseIntensity={0.03}
       scanlineIntensity={0.05}
@@ -31,9 +31,9 @@ import VisionemaLogo from "./VisionemaLogo.tsx";
     <h1
       class="text-[clamp(2.75rem,6.5vw,9rem)] leading-[1.05] tracking-tight text-foreground font-extrabold select-none mb-6"
     >
-      <SplitText text="Mulai, Tumbuh, dan" client:load delay={0.2} /><br />
+      <SplitText text="Mulai, Tumbuh, dan" client:visible delay={0.2} /><br />
       <span class="font-serif italic font-normal text-accent drop-shadow-sm">
-        <SplitText text="Menang Bareng!" client:load delay={0.5} />
+        <SplitText text="Menang Bareng!" client:visible delay={0.5} />
       </span>
     </h1>
 

@@ -86,7 +86,7 @@ const team = [
     </div>
 
     <!-- Team Carousel Layout -->
-    <div class="relative w-full">
+    <div class="relative w-full touch-pan-y">
       <!-- Navigation Buttons / Carousel Controls -->
       <div class="flex justify-end gap-3 mb-6 relative z-20">
         <button
@@ -111,7 +111,7 @@ const team = [
 
       <!-- Carousel Container -->
       <div
-        class="overflow-hidden py-4 select-none relative"
+        class="overflow-hidden py-4 select-none relative touch-pan-y"
         id="team-carousel"
       >
         <!-- Fade Overlays (Hardware-friendly gradient overlays instead of CSS mask-image) -->
@@ -119,13 +119,13 @@ const team = [
         <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
 
         <div 
-          class="flex gap-6 transition-transform duration-500 ease-out" 
+          class="flex gap-6 transition-transform duration-500 ease-out touch-pan-y" 
           id="team-track"
           style="transform: translate3d(0px, 0px, 0px);"
         >
           {
             team.map((member) => (
-              <div class="team-card w-full sm:w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] shrink-0 p-3">
+              <div class="team-card w-full sm:w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] shrink-0 p-3 touch-pan-y">
                 <Image
                   src={member.image}
                   alt={member.name}
@@ -134,7 +134,7 @@ const team = [
                   format="webp"
                   quality={80}
                   loading="eager"
-                  class="w-full h-auto object-contain"
+                  class="w-full h-auto object-contain pointer-events-none touch-pan-y"
                   draggable="false"
                 />
               </div>
@@ -162,6 +162,9 @@ const team = [
   const nextBtn = document.getElementById("next-btn");
 
   if (track && prevBtn && nextBtn) {
+    const trackEl = track;
+    const prevBtnEl = prevBtn;
+    const nextBtnEl = nextBtn;
     let currentIndex = 0;
 
     function getItemsPerPage() {
@@ -172,7 +175,7 @@ const team = [
     }
 
     function updateCarousel() {
-      const items = track.children;
+      const items = trackEl.children;
       if (items.length === 0) return;
       
       const totalItems = items.length;
@@ -191,36 +194,36 @@ const team = [
       const offset = currentIndex * (itemWidth + gap);
       
       // Use translate3d to force hardware acceleration on iOS Safari
-      track.style.transform = `translate3d(-${offset}px, 0px, 0px)`;
+      trackEl.style.transform = `translate3d(-${offset}px, 0px, 0px)`;
 
       // Enable/disable navigation buttons based on position
       if (currentIndex === 0) {
-        prevBtn.classList.add("opacity-40", "cursor-not-allowed");
-        prevBtn.setAttribute("disabled", "true");
+        prevBtnEl.classList.add("opacity-40", "cursor-not-allowed");
+        prevBtnEl.setAttribute("disabled", "true");
       } else {
-        prevBtn.classList.remove("opacity-40", "cursor-not-allowed");
-        prevBtn.removeAttribute("disabled");
+        prevBtnEl.classList.remove("opacity-40", "cursor-not-allowed");
+        prevBtnEl.removeAttribute("disabled");
       }
       
       if (currentIndex === maxIndex) {
-        nextBtn.classList.add("opacity-40", "cursor-not-allowed");
-        nextBtn.setAttribute("disabled", "true");
+        nextBtnEl.classList.add("opacity-40", "cursor-not-allowed");
+        nextBtnEl.setAttribute("disabled", "true");
       } else {
-        nextBtn.classList.remove("opacity-40", "cursor-not-allowed");
-        nextBtn.removeAttribute("disabled");
+        nextBtnEl.classList.remove("opacity-40", "cursor-not-allowed");
+        nextBtnEl.removeAttribute("disabled");
       }
     }
 
-    prevBtn.addEventListener("click", () => {
+    prevBtnEl.addEventListener("click", () => {
       if (currentIndex > 0) {
         currentIndex--;
         updateCarousel();
       }
     });
 
-    nextBtn.addEventListener("click", () => {
+    nextBtnEl.addEventListener("click", () => {
       const itemsPerPage = getItemsPerPage();
-      const maxIndex = Math.max(0, track.children.length - itemsPerPage);
+      const maxIndex = Math.max(0, trackEl.children.length - itemsPerPage);
       if (currentIndex < maxIndex) {
         currentIndex++;
         updateCarousel();
@@ -228,9 +231,9 @@ const team = [
     });
 
     // Handle resize
-    let resizeTimer;
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined;
     window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
+      if (resizeTimer) clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         updateCarousel();
       }, 100);
