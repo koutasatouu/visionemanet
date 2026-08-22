@@ -87,7 +87,7 @@ const team = [
 
     <!-- Team Carousel Layout -->
     <div
-      class="relative w-full overflow-hidden py-4 cursor-grab active:cursor-grabbing select-none mask-fade"
+      class="relative w-full overflow-hidden py-4 select-none mask-fade pointer-events-none"
       id="team-carousel"
     >
       <div class="flex gap-6 w-max" id="team-marquee-track">
@@ -149,116 +149,16 @@ const team = [
     const activeTrack = track;
     let position = 0;
     const baseSpeed = 1.0; // base scrolling speed (pixels per frame)
-    let currentSpeed = baseSpeed;
-    // Drag states
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-    let dragStartPosition = 0;
-    let velocity = 0;
-    let lastX = 0;
-    let directionDetermined = false;
-    let isScrollingCarousel = false;
-
-    // Mouse events
-    carousel.addEventListener("mousedown", (e) => {
-      e.preventDefault(); // Prevents browser image dragging and text selection bugs
-      isDragging = true;
-      startX = e.clientX;
-      dragStartPosition = position;
-      lastX = e.clientX;
-      velocity = 0;
-    });
-
-    window.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
-      const deltaX = e.clientX - startX;
-      velocity = e.clientX - lastX;
-      lastX = e.clientX;
-      position = dragStartPosition + deltaX;
-    });
-
-    window.addEventListener("mouseup", () => {
-      isDragging = false;
-    });
-
-    // Touch events
-    carousel.addEventListener("touchstart", (e) => {
-      isDragging = false;
-      directionDetermined = false;
-      isScrollingCarousel = false;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      dragStartPosition = position;
-      lastX = e.touches[0].clientX;
-      velocity = 0;
-    });
-
-    carousel.addEventListener("touchmove", (e) => {
-      const touch = e.touches[0];
-      const deltaX = touch.clientX - startX;
-      const deltaY = touch.clientY - startY;
-
-      if (!directionDetermined) {
-        // Require 8px of movement to confirm intent
-        if (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8) {
-          directionDetermined = true;
-          if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            isScrollingCarousel = true;
-            isDragging = true;
-            startX = touch.clientX; // reset to avoid initial jump
-            dragStartPosition = position;
-            lastX = touch.clientX;
-          } else {
-            isScrollingCarousel = false;
-            isDragging = false;
-          }
-        }
-      }
-
-      if (directionDetermined && isScrollingCarousel) {
-        if (e.cancelable) e.preventDefault(); // lock vertical page scrolling
-        velocity = touch.clientX - lastX;
-        lastX = touch.clientX;
-        position = dragStartPosition + (touch.clientX - startX);
-      }
-    }, { passive: false });
-
-    carousel.addEventListener("touchend", () => {
-      isDragging = false;
-      directionDetermined = false;
-      if (!isScrollingCarousel) {
-        velocity = 0; // do not apply inertia if user was vertical scrolling
-      }
-    });
 
     function animate() {
       const gap = 24;
       const resetPoint = (activeTrack.scrollWidth + gap) / 2;
 
-      if (isDragging) {
-        // While dragging, just render the drag position
-      } else {
-        // Decelerate drag throwing force (inertia)
-        if (Math.abs(velocity) > 0.1) {
-          const maxVel = 15; // Cap maximum velocity
-          const cappedVelocity = Math.min(Math.max(velocity, -maxVel), maxVel);
-          position += cappedVelocity;
-          velocity *= 0.92; // Faster decay for controlled stop
-        } else {
-          // Resume auto-scroll
-          currentSpeed += (baseSpeed - currentSpeed) * 0.05;
-          position -= currentSpeed;
-        }
-      }
+      position -= baseSpeed;
 
-      // Loop wrapping for infinite scroll in both directions
+      // Loop wrapping for infinite scroll
       if (position <= -resetPoint) {
         position += resetPoint;
-        if (isDragging) dragStartPosition += resetPoint;
-      } else if (position >= 0) {
-        position -= resetPoint;
-        if (isDragging) dragStartPosition -= resetPoint;
       }
 
       activeTrack.style.transform = `translateX(${position}px)`;
