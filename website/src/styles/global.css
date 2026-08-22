@@ -178,3 +178,13 @@ h1, h2, h3, h4 {
   font-size: 12px;
   letter-spacing: 0.05em;
 }
+
+/* Personality: brand-colored text selection */
+::selection { background: var(--brand-cyan); color: var(--brand-ink); }
+::-moz-selection { background: var(--brand-cyan); color: var(--brand-ink); }
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+}

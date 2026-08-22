@@ -1,0 +1,42 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { waLink } from '../config';
+---
+<MainLayout title="404 · Visionema.net" description="Halaman ini hilang. Kayak konten tanpa strategi." lang="id" path="/404">
+  <section class="nf">
+    <div class="container nf-inner">
+      <div class="nf-code" aria-hidden="true">4<span class="nf-eye">0</span>4</div>
+      <h1 class="nf-title">Halaman ini hilang.</h1>
+      <p class="nf-sub">
+        Kayak konten tanpa strategi — ada, tapi nggak pernah ketemu.
+        <span class="nf-en">This page is missing. Like content without a strategy.</span>
+      </p>
+      <div class="nf-actions">
+        <a href="/" class="btn btn-primary" data-testid="nf-home">Balik ke Beranda →</a>
+        <a href={waLink('Halo Visionema.net! Aku nyasar di 404 tapi malah pengen ngobrol 😄')} target="_blank" rel="noopener" class="btn btn-ghost" data-testid="nf-wa">Sekalian Ngobrol di WA</a>
+      </div>
+      <p class="nf-joke">Tenang, feed klien kami nggak pernah nyasar kayak gini.</p>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .nf { min-height: 82vh; display: flex; align-items: center; background: radial-gradient(circle at 70% 20%, rgba(30,86,232,0.25), transparent 55%), var(--brand-ink); }
+  .nf-inner { padding: 80px var(--pad); }
+  .nf-code {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(120px, 24vw, 320px);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255,255,255,0.25);
+  }
+  .nf-eye { color: var(--brand-yellow); -webkit-text-stroke: 0; font-family: var(--font-serif); font-style: italic; display: inline-block; animation: nf-blink 4s ease-in-out infinite; }
+  @keyframes nf-blink { 0%, 92%, 100% { transform: none; } 96% { transform: scaleY(0.1); } }
+  .nf-title { font-size: clamp(36px, 6vw, 72px); margin-top: 16px; letter-spacing: -0.03em; }
+  .nf-sub { font-size: 18px; opacity: 0.75; margin-top: 16px; max-width: 460px; }
+  .nf-en { display: block; font-size: 14px; opacity: 0.55; margin-top: 6px; font-style: italic; }
+  .nf-actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+  .nf-joke { margin-top: 40px; font-size: 13px; opacity: 0.4; font-family: var(--font-display); letter-spacing: 0.04em; }
+</style>

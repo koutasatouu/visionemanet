@@ -32,7 +32,7 @@ const prefix = lang === 'en' ? '/en' : '';
   </div>
   <div class="foot-bar container">
     <span>{t.footer.copyright[lang]}</span>
-    <span>Made in Magelang · ✦</span>
+    <span class="foot-made" title={lang === 'id' ? 'Dibuat sambil ngopi & scroll FYP' : 'Made while sipping coffee & scrolling FYP'}>Made in Magelang · <span class="foot-star">✦</span></span>
   </div>
 <style>
   .foot { background: var(--brand-blue-deep); color: #fff; padding: 80px 0 24px; position: relative; overflow: hidden; }
@@ -47,6 +47,10 @@ const prefix = lang === 'en' ? '/en' : '';
   .foot-cols a:hover { color: var(--brand-yellow); }
   .muted { opacity: 0.5; padding: 6px 0; font-size: 14px; }
   .foot-bar { margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; opacity: 0.6; flex-wrap: wrap; gap: 12px; }
+  .foot-star { display: inline-block; transition: transform .6s cubic-bezier(.3,1.6,.4,1); }
+  .foot-made:hover .foot-star { transform: rotate(360deg) scale(1.4); color: var(--brand-yellow); }
+  .foot-word:hover .yellow { display: inline-block; animation: foot-wiggle .5s ease; }
+  @keyframes foot-wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-4deg); } 75% { transform: rotate(4deg); } }
   @media (max-width: 720px) {
     .foot-top { grid-template-columns: 1fr; gap: 40px; }
     .foot-cols { grid-template-columns: 1fr 1fr; }

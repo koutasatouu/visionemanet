@@ -58,6 +58,22 @@ const {
       );
       document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
+      // Easter egg: for the curious ones peeking at the console
+      console.log('%cVISIONEMA.NET', 'font-size:26px;font-weight:bold;color:#33CCFF;letter-spacing:2px');
+      console.log(
+        '%cNgintip console ya? Kami suka orang teliti. 👀\nKerja bareng yuk → https://wa.me/6287724199349',
+        'font-size:13px;color:#FFCC00'
+      );
+
+      // Playful tab title when the user leaves
+      const originalTitle = document.title;
+      const isId = document.body.dataset.lang === 'id';
+      document.addEventListener('visibilitychange', () => {
+        document.title = document.hidden
+          ? (isId ? 'Jangan lupa balik ya 👀 · Visionema.net' : 'Come back soon 👀 · Visionema.net')
+          : originalTitle;
+      });
+
       // Language toggle: rewrites path prefix
       window.addEventListener('click', (ev) => {
         const target = (ev.target as HTMLElement)?.closest('[data-lang-switch]');
