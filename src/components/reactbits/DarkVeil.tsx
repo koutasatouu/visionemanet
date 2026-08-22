@@ -136,11 +136,24 @@ export default function DarkVeil({
     window.addEventListener('resize', resize);
     resize();
 
-    const start = performance.now();
+    let accumulatedTime = 0;
+    let lastTime = performance.now();
+    let lastScroll = window.scrollY;
     let frame = 0;
 
     const loop = () => {
-      program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
+      const now = performance.now();
+      const dt = (now - lastTime) / 1000;
+      lastTime = now;
+
+      const currentScroll = window.scrollY;
+      const scrollDelta = Math.abs(currentScroll - lastScroll);
+      lastScroll = currentScroll;
+
+      // Base clock progress plus scroll boost (0.003 coefficient for speedup)
+      accumulatedTime += (dt * speed) + (scrollDelta * 0.003);
+
+      program.uniforms.uTime.value = accumulatedTime;
       program.uniforms.uHueShift.value = hueShift;
       program.uniforms.uNoise.value = noiseIntensity;
       program.uniforms.uScan.value = scanlineIntensity;
