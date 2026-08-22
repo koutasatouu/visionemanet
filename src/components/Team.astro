@@ -173,6 +173,13 @@ const team = [
     let currentSpeed = baseSpeed;
     let isHovered = false;
 
+    // Drag states
+    let isDragging = false;
+    let startX = 0;
+    let dragStartPosition = 0;
+    let velocity = 0;
+    let lastX = 0;
+
     carousel.addEventListener('mouseenter', () => {
       isHovered = true;
     });
@@ -181,21 +188,74 @@ const team = [
       isHovered = false;
     });
 
+    // Mouse events
+    carousel.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      dragStartPosition = position;
+      lastX = e.clientX;
+      velocity = 0;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - startX;
+      velocity = e.clientX - lastX;
+      lastX = e.clientX;
+      position = dragStartPosition + deltaX;
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Touch events
+    carousel.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      dragStartPosition = position;
+      lastX = e.touches[0].clientX;
+      velocity = 0;
+    });
+
+    carousel.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const deltaX = e.touches[0].clientX - startX;
+      velocity = e.touches[0].clientX - lastX;
+      lastX = e.touches[0].clientX;
+      position = dragStartPosition + deltaX;
+    });
+
+    carousel.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
     function animate() {
-      const targetSpeed = isHovered ? 0 : baseSpeed;
-      
-      // Interpolate speed (lerp) with a small factor (0.05) for smooth deceleration/acceleration
-      currentSpeed += (targetSpeed - currentSpeed) * 0.05;
-
-      position -= currentSpeed;
-
-      // Gap is 24px (gap-6)
       const gap = 24;
       const resetPoint = (activeTrack.scrollWidth + gap) / 2;
 
-      if (Math.abs(position) >= resetPoint) {
-        // Offset the overflow to keep transition perfectly seamless
-        position = position + resetPoint;
+      if (isDragging) {
+        // While dragging, just render the drag position
+      } else {
+        // Decelerate drag throwing force (inertia)
+        if (Math.abs(velocity) > 0.1) {
+          position += velocity;
+          velocity *= 0.95; // Decay factor
+        } else {
+          // Resume auto-scroll
+          const targetSpeed = isHovered ? 0 : baseSpeed;
+          currentSpeed += (targetSpeed - currentSpeed) * 0.05;
+          position -= currentSpeed;
+        }
+      }
+
+      // Loop wrapping for infinite scroll in both directions
+      if (position <= -resetPoint) {
+        position += resetPoint;
+        if (isDragging) dragStartPosition += resetPoint;
+      } else if (position >= 0) {
+        position -= resetPoint;
+        if (isDragging) dragStartPosition -= resetPoint;
       }
 
       activeTrack.style.transform = `translateX(${position}px)`;
