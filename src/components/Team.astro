@@ -150,8 +150,6 @@ const team = [
     let position = 0;
     const baseSpeed = 1.0; // base scrolling speed (pixels per frame)
     let currentSpeed = baseSpeed;
-    let isHovered = false;
-
     // Drag states
     let isDragging = false;
     let startX = 0;
@@ -161,14 +159,6 @@ const team = [
     let lastX = 0;
     let directionDetermined = false;
     let isScrollingCarousel = false;
-
-    carousel.addEventListener("mouseenter", () => {
-      isHovered = true;
-    });
-
-    carousel.addEventListener("mouseleave", () => {
-      isHovered = false;
-    });
 
     // Mouse events
     carousel.addEventListener("mousedown", (e) => {
@@ -257,8 +247,7 @@ const team = [
           velocity *= 0.92; // Faster decay for controlled stop
         } else {
           // Resume auto-scroll
-          const targetSpeed = isHovered ? 0 : baseSpeed;
-          currentSpeed += (targetSpeed - currentSpeed) * 0.05;
+          currentSpeed += (baseSpeed - currentSpeed) * 0.05;
           position -= currentSpeed;
         }
       }
