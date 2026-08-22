@@ -86,34 +86,42 @@ const team = [
     </div>
 
     <!-- Team Carousel Layout -->
-    <div
-      class="relative w-full overflow-hidden py-4 select-none mask-fade pointer-events-none"
-      id="team-carousel"
-    >
-      <div class="flex gap-6 w-max" id="team-marquee-track">
-        <!-- Group 1 -->
-        <div class="flex gap-6 shrink-0">
-          {
-            team.map((member) => (
-              <div class="w-[280px] sm:w-[320px] shrink-0 transition-transform duration-500 hover:-translate-y-2 p-3">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  width={600}
-                  height={800}
-                  class="w-full h-auto object-contain"
-                  draggable="false"
-                />
-              </div>
-            ))
-          }
-        </div>
+    <div class="relative w-full">
+      <!-- Navigation Buttons / Carousel Controls -->
+      <div class="flex justify-end gap-3 mb-6 relative z-20">
+        <button
+          id="prev-btn"
+          class="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 text-foreground hover:bg-white/10 hover:border-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-accent"
+          aria-label="Previous slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+        <button
+          id="next-btn"
+          class="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 text-foreground hover:bg-white/10 hover:border-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-accent"
+          aria-label="Next slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      </div>
 
-        <!-- Group 2 (Duplicate for infinite seamless loop) -->
-        <div class="flex gap-6 shrink-0" aria-hidden="true">
+      <!-- Carousel Container -->
+      <div
+        class="overflow-hidden py-4 select-none mask-fade"
+        id="team-carousel"
+      >
+        <div 
+          class="flex gap-6 transition-transform duration-500 ease-out" 
+          id="team-track"
+          style="transform: translateX(0px);"
+        >
           {
             team.map((member) => (
-              <div class="w-[280px] sm:w-[320px] shrink-0 transition-transform duration-500 hover:-translate-y-2 p-3">
+              <div class="w-full sm:w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] shrink-0 transition-transform duration-500 hover:-translate-y-2 p-3">
                 <Image
                   src={member.image}
                   alt={member.name}
@@ -142,31 +150,86 @@ const team = [
 </section>
 
 <script>
-  const carousel = document.getElementById("team-carousel");
-  const track = document.getElementById("team-marquee-track");
+  const track = document.getElementById("team-track");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
 
-  if (carousel && track) {
-    const activeTrack = track;
-    let position = 0;
-    const baseSpeed = 1.0; // base scrolling speed (pixels per frame)
+  if (track && prevBtn && nextBtn) {
+    let currentIndex = 0;
 
-    function animate() {
-      const gap = 24;
-      const resetPoint = (activeTrack.scrollWidth + gap) / 2;
-
-      position -= baseSpeed;
-
-      // Loop wrapping for infinite scroll
-      if (position <= -resetPoint) {
-        position += resetPoint;
-      }
-
-      activeTrack.style.transform = `translateX(${position}px)`;
-      requestAnimationFrame(animate);
+    function getItemsPerPage() {
+      if (window.innerWidth >= 1024) return 4; // lg
+      if (window.innerWidth >= 768) return 3;  // md
+      if (window.innerWidth >= 640) return 2;  // sm
+      return 1;
     }
 
-    // Start animation loop
-    requestAnimationFrame(animate);
+    function updateCarousel() {
+      const items = track.children;
+      if (items.length === 0) return;
+      
+      const totalItems = items.length;
+      const itemsPerPage = getItemsPerPage();
+      const maxIndex = Math.max(0, totalItems - itemsPerPage);
+      
+      if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
+      }
+      if (currentIndex < 0) {
+        currentIndex = 0;
+      }
+
+      const itemWidth = items[0].getBoundingClientRect().width;
+      const gap = 24; // gap-6 is 24px
+      const offset = currentIndex * (itemWidth + gap);
+      
+      track.style.transform = `translateX(-${offset}px)`;
+
+      // Enable/disable navigation buttons based on position
+      if (currentIndex === 0) {
+        prevBtn.classList.add("opacity-40", "cursor-not-allowed");
+        prevBtn.setAttribute("disabled", "true");
+      } else {
+        prevBtn.classList.remove("opacity-40", "cursor-not-allowed");
+        prevBtn.removeAttribute("disabled");
+      }
+      
+      if (currentIndex === maxIndex) {
+        nextBtn.classList.add("opacity-40", "cursor-not-allowed");
+        nextBtn.setAttribute("disabled", "true");
+      } else {
+        nextBtn.classList.remove("opacity-40", "cursor-not-allowed");
+        nextBtn.removeAttribute("disabled");
+      }
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      const itemsPerPage = getItemsPerPage();
+      const maxIndex = Math.max(0, track.children.length - itemsPerPage);
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+
+    // Handle resize
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        updateCarousel();
+      }, 100);
+    });
+
+    // Initial positioning
+    setTimeout(updateCarousel, 150);
   }
 </script>
 
