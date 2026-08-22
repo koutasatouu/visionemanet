@@ -159,6 +159,8 @@ const team = [
     let dragStartPosition = 0;
     let velocity = 0;
     let lastX = 0;
+    let directionDetermined = false;
+    let isScrollingCarousel = false;
 
     carousel.addEventListener("mouseenter", () => {
       isHovered = true;
@@ -192,7 +194,9 @@ const team = [
 
     // Touch events
     carousel.addEventListener("touchstart", (e) => {
-      isDragging = true;
+      isDragging = false;
+      directionDetermined = false;
+      isScrollingCarousel = false;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
       dragStartPosition = position;
@@ -201,22 +205,41 @@ const team = [
     });
 
     carousel.addEventListener("touchmove", (e) => {
-      if (!isDragging) return;
-      const deltaX = e.touches[0].clientX - startX;
-      const deltaY = e.touches[0].clientY - startY;
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - startX;
+      const deltaY = touch.clientY - startY;
 
-      // Prevent window scrolling if user is swipe dragging horizontally
-      if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        if (e.cancelable) e.preventDefault();
+      if (!directionDetermined) {
+        // Require 8px of movement to confirm intent
+        if (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8) {
+          directionDetermined = true;
+          if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            isScrollingCarousel = true;
+            isDragging = true;
+            startX = touch.clientX; // reset to avoid initial jump
+            dragStartPosition = position;
+            lastX = touch.clientX;
+          } else {
+            isScrollingCarousel = false;
+            isDragging = false;
+          }
+        }
       }
 
-      velocity = e.touches[0].clientX - lastX;
-      lastX = e.touches[0].clientX;
-      position = dragStartPosition + deltaX;
+      if (directionDetermined && isScrollingCarousel) {
+        if (e.cancelable) e.preventDefault(); // lock vertical page scrolling
+        velocity = touch.clientX - lastX;
+        lastX = touch.clientX;
+        position = dragStartPosition + (touch.clientX - startX);
+      }
     }, { passive: false });
 
     carousel.addEventListener("touchend", () => {
       isDragging = false;
+      directionDetermined = false;
+      if (!isScrollingCarousel) {
+        velocity = 0; // do not apply inertia if user was vertical scrolling
+      }
     });
 
     function animate() {
@@ -228,8 +251,10 @@ const team = [
       } else {
         // Decelerate drag throwing force (inertia)
         if (Math.abs(velocity) > 0.1) {
-          position += velocity;
-          velocity *= 0.95; // Decay factor
+          const maxVel = 15; // Cap maximum velocity
+          const cappedVelocity = Math.min(Math.max(velocity, -maxVel), maxVel);
+          position += cappedVelocity;
+          velocity *= 0.92; // Faster decay for controlled stop
         } else {
           // Resume auto-scroll
           const targetSpeed = isHovered ? 0 : baseSpeed;
