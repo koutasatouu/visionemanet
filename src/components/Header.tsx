@@ -38,7 +38,7 @@ export default function Header() {
       changeMenuColorOnOpen={true}
       colors={['#16161a', '#0a0a0c']}
       logo={logoNode}
-      accentColor="#3b82f6"
+      accentColor="#ff7000"
       isFixed={true}
     />
   );

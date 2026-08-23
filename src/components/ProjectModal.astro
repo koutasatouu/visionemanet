@@ -1,0 +1,202 @@
+---
+---
+
+<!-- Project Detail Modal -->
+<div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300">
+  <div id="project-modal-backdrop" class="absolute inset-0 bg-background/80 backdrop-blur-xl transition-opacity duration-300"></div>
+  
+  <div class="relative w-full max-w-4xl lg:max-w-5xl bg-[#121217] border border-white/10 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl overflow-hidden z-10 transform scale-95 transition-transform duration-300 max-h-[90vh] flex flex-col" id="project-modal-card">
+    <!-- Close Button -->
+    <button 
+      id="project-modal-close" 
+      class="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-white/10 transition-colors z-20 cursor-pointer"
+      aria-label="Tutup Detail"
+    >
+      ✕
+    </button>
+
+    <!-- Modal Content: 2-Column Grid (Left: Video, Right: Info) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center overflow-y-auto pr-1">
+      <!-- Left: Media Container -->
+      <div class="md:col-span-6 flex items-center justify-center">
+        <div id="modal-media-wrapper" class="relative w-full max-h-[60vh] rounded-2xl overflow-hidden bg-black border border-white/10 flex items-center justify-center group shadow-xl">
+          <video 
+            id="modal-video" 
+            class="hidden w-full h-full max-h-[60vh] object-cover rounded-2xl" 
+            playsinline 
+            controls 
+            preload="metadata"
+          ></video>
+
+          <!-- Big Play Button Overlay -->
+          <button 
+            id="modal-play-btn" 
+            type="button"
+            class="hidden absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-accent/90 hover:bg-accent text-white flex items-center justify-center shadow-2xl shadow-accent/40 z-20 cursor-pointer transition-all transform hover:scale-110 active:scale-95"
+            aria-label="Play Video"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 sm:w-10 sm:h-10 fill-current translate-x-0.5" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </button>
+
+          <div id="modal-placeholder" class="hidden relative w-full aspect-4/3 flex items-center justify-center">
+            <div id="modal-gradient" class="absolute inset-0 opacity-50"></div>
+            <span id="modal-num-large" class="text-white/20 font-mono text-9xl select-none relative z-10"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Details & Discussion CTA -->
+      <div class="md:col-span-6 flex flex-col justify-between h-full py-2">
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <span id="modal-category" class="text-xs font-mono font-bold uppercase tracking-widest text-accent px-3 py-1 rounded-full bg-accent/10 border border-accent/20"></span>
+          </div>
+          <h3 id="modal-title" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground tracking-tight leading-tight"></h3>
+          <p id="modal-desc" class="text-foreground/70 text-base sm:text-lg leading-relaxed mt-4"></p>
+        </div>
+
+        <div class="pt-6 mt-6 border-t border-white/10 flex flex-col gap-4">
+          <a 
+            href="https://wa.me/6281234567890" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="group btn-cta-orange w-full py-4 text-sm sm:text-base"
+          >
+            <div class="shimmer-sweep"></div>
+            <span class="relative z-20">Diskusi Konsep</span>
+            <span class="btn-arrow-capsule !w-7 !h-7 group-hover:text-[#ff7000]">
+              <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupProjectModal() {
+    const triggers = document.querySelectorAll('.project-trigger');
+    const modal = document.getElementById('project-modal');
+    const modalBackdrop = document.getElementById('project-modal-backdrop');
+    const modalClose = document.getElementById('project-modal-close');
+    const modalMediaWrapper = document.getElementById('modal-media-wrapper');
+    const modalVideo = document.getElementById('modal-video') as HTMLVideoElement | null;
+    const modalPlayBtn = document.getElementById('modal-play-btn');
+    const modalPlaceholder = document.getElementById('modal-placeholder');
+    const modalGradient = document.getElementById('modal-gradient');
+    const modalNumLarge = document.getElementById('modal-num-large');
+    const modalCategory = document.getElementById('modal-category');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalCard = document.getElementById('project-modal-card');
+
+    if (!modal || !modalBackdrop || !modalClose) return;
+
+    function adjustVideoAspectRatio() {
+      if (modalVideo?.videoWidth && modalVideo?.videoHeight && modalMediaWrapper) {
+        modalMediaWrapper.style.aspectRatio = `${modalVideo.videoWidth} / ${modalVideo.videoHeight}`;
+      }
+    }
+
+    function openModal(data: any) {
+      if (modalCategory) modalCategory.textContent = `${data.num} — ${data.category}`;
+      if (modalTitle) modalTitle.textContent = data.title;
+      if (modalDesc) modalDesc.textContent = data.desc;
+
+      if (data.video && modalVideo) {
+        modalVideo.src = data.video;
+        modalVideo.muted = false;
+        modalVideo.currentTime = 0;
+        modalVideo.classList.remove('hidden');
+        modalPlayBtn?.classList.remove('hidden');
+        modalPlaceholder?.classList.add('hidden');
+        modalVideo.load();
+        adjustVideoAspectRatio();
+      } else {
+        if (modalMediaWrapper) modalMediaWrapper.style.aspectRatio = '4 / 3';
+        if (modalVideo) {
+          modalVideo.removeAttribute('src');
+          modalVideo.load();
+          modalVideo.classList.add('hidden');
+        }
+        modalPlayBtn?.classList.add('hidden');
+        if (modalPlaceholder && modalNumLarge && modalGradient) {
+          modalPlaceholder.classList.remove('hidden');
+          modalNumLarge.textContent = data.num;
+          modalGradient.className = `absolute inset-0 opacity-50 bg-gradient-to-tr ${data.color || 'from-blue-600/20 to-purple-600/20'}`;
+        }
+      }
+
+      modal?.classList.remove('opacity-0', 'pointer-events-none');
+      modal?.classList.add('opacity-100', 'pointer-events-auto');
+      modalCard?.classList.remove('scale-95');
+      modalCard?.classList.add('scale-100');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal?.classList.add('opacity-0', 'pointer-events-none');
+      modal?.classList.remove('opacity-100', 'pointer-events-auto');
+      modalCard?.classList.add('scale-95');
+      modalCard?.classList.remove('scale-100');
+      if (modalVideo) {
+        modalVideo.pause();
+        modalVideo.removeAttribute('src');
+        modalVideo.load();
+      }
+      modalPlayBtn?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    if (modalVideo) {
+      modalVideo.addEventListener('loadedmetadata', adjustVideoAspectRatio);
+      modalVideo.addEventListener('play', () => modalPlayBtn?.classList.add('hidden'));
+      modalVideo.addEventListener('pause', () => {
+        if (!modalVideo.seeking && modalVideo.getAttribute('src')) modalPlayBtn?.classList.remove('hidden');
+      });
+      modalVideo.addEventListener('ended', () => modalPlayBtn?.classList.remove('hidden'));
+    }
+
+    if (modalPlayBtn && modalVideo) {
+      modalPlayBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        modalVideo.play().catch(console.warn);
+      });
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const rawData = trigger.getAttribute('data-project');
+        if (!rawData) return;
+        try {
+          const data = JSON.parse(rawData);
+          if (!data.video) {
+            const cardVideo = trigger.querySelector('video');
+            if (cardVideo) data.video = cardVideo.currentSrc || cardVideo.getAttribute('src') || '';
+          }
+          openModal(data);
+        } catch (e) {
+          console.error('Failed to parse project data', e);
+        }
+      });
+    });
+
+    modalClose.onclick = closeModal;
+    modalBackdrop.onclick = closeModal;
+    window.onkeydown = (e) => {
+      if (e.key === 'Escape') closeModal();
+    };
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupProjectModal);
+  } else {
+    setupProjectModal();
+  }
+  document.addEventListener('astro:page-load', setupProjectModal);
+</script>

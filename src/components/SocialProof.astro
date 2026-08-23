@@ -1,181 +1,159 @@
 ---
-
+import CountUp from './reactbits/CountUp';
+import AnimatedContent from './reactbits/AnimatedContent';
 ---
 
-<section
-  id="about"
-  class="bg-background pb-24 lg:pb-32 border-t border-white/5 pt-24"
->
-  <div
-    class="px-6 sm:px-12 lg:px-24 flex flex-col items-center max-w-360 2xl:max-w-450 3xl:max-w-550 mx-auto"
-  >
-    <!-- Image banner -->
-    <div
-      class="relative aspect-21/9 lg:aspect-3/1 w-full overflow-hidden rounded-[2.5rem] mb-16 bg-white/5 border border-white/5 shadow-inner flex items-center justify-center p-8"
-    >
-      <div class="text-center">
-        <span
-          class="text-white/10 font-serif italic text-4xl sm:text-6xl tracking-widest font-thin block select-none"
-          >VISIONEMA.NET</span
-        >
-        <span
-          class="text-xs uppercase tracking-widest font-mono text-accent mt-2 block font-bold"
-          >Est 2021</span
-        >
-      </div>
-    </div>
-
-    <h2
-      class="text-[clamp(1.5rem,3vw,2.25rem)] font-extrabold leading-[1.4] tracking-tight text-center mx-auto text-foreground max-w-4xl"
-    >
-      Di Visionema.net, kami membantu bisnis Anda memikat audiens lewat konten
-      visual estetik, penulisan skrip terarah, dan manajemen media sosial yang
-      terintegrasi.
-    </h2>
-    <a
-      class="inline-flex items-center justify-center mt-10 px-8 py-4 rounded-full bg-white text-background text-lg tracking-tight font-bold hover:scale-105 active:scale-95 transition-transform duration-300"
-      href="#contact"
-    >
-      Pelajari Selengkapnya
-    </a>
-  </div>
-</section>
-
-<section id="social-proof" class="bg-background py-24 border-t border-white/5">
+<section id="about" class="bg-background py-24 border-t border-white/5">
   <div
     class="px-6 sm:px-12 lg:px-24 max-w-360 2xl:max-w-450 3xl:max-w-550 mx-auto"
   >
-    <div
-      class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-16 gap-6"
-    >
-      <h2
-        class="text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground"
+    <AnimatedContent distance={50} direction="vertical" duration={0.8} threshold={0.15} client:visible>
+      <div
+        class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-16 gap-6"
       >
-        Dipercaya oleh berbagai brand
-      </h2>
-      <a
-        class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-accent text-white text-sm font-bold hover:opacity-95 transition-opacity"
-        href="#contact"
-      >
-        Mulai Menang Bareng
-      </a>
-    </div>
+        <h2
+          class="text-3xl lg:text-5xl font-extrabold tracking-tight text-foreground"
+        >
+          Kenapa Harus <span class="text-accent font-serif italic">Visionema.net?</span>
+        </h2>
+        <a href="#contact" class="group btn-cta-blue px-6 py-3.5 text-sm shrink-0">
+          <div class="shimmer-sweep"></div>
+          <span class="relative z-20">Yuk Ngobrol Santai</span>
+          <span class="btn-arrow-capsule !w-6 !h-6 group-hover:text-[#2563eb]">
+            <svg class="w-3 h-3 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </AnimatedContent>
 
     <!-- Layout Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Card 1: Testimonial -->
-      <div
-        class="lg:col-span-2 bg-white/5 border border-white/5 rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[320px]"
-      >
-        <div>
-          <!-- Quote Icon -->
-          <svg
-            class="w-10 h-10 text-white/10 mb-6"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path
-              d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"
-            ></path>
-          </svg>
-          <blockquote
-            class="text-xl sm:text-2xl font-bold leading-snug text-foreground/90"
-          >
-            Pengerjaan kontennya sangat rapi dan estetik, Visionema benar-benar
-            paham bagaimana membuat brand kami dinilai premium oleh audiens.
-          </blockquote>
-        </div>
+      <AnimatedContent distance={60} direction="vertical" duration={0.8} delay={0.05} threshold={0.1} className="lg:col-span-2 h-full" client:visible>
         <div
-          class="mt-8 flex items-center justify-between border-t border-white/5 pt-6"
+          class="card-glass p-8 sm:p-10 flex flex-col justify-between min-h-[320px] h-full"
         >
           <div>
-            <p class="font-bold text-foreground text-base">Faisal R.</p>
-            <p class="text-sm text-foreground/60">Pendiri, Local Apparel</p>
+            <!-- Quote Icon -->
+            <svg
+              class="w-10 h-10 text-white/10 mb-6"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"
+              ></path>
+            </svg>
+            <blockquote
+              class="text-xl sm:text-2xl font-bold leading-snug text-foreground/90"
+            >
+              "Hasil kontennya beneran di luar ekspektasi, rapi dan estetik parah! Visionema beneran ngerti cara bikin brand kami keliatan mahal dan dipercaya audiens."
+            </blockquote>
           </div>
-          <span class="text-lg font-bold tracking-tight opacity-40"
-            >apparel.co</span
+          <div
+            class="mt-8 flex items-center justify-between border-t border-white/5 pt-6"
           >
+            <div>
+              <p class="font-bold text-foreground text-base">Faisal R.</p>
+              <p class="text-sm text-foreground/60">Owner, Local Apparel</p>
+            </div>
+            <span class="text-lg font-bold tracking-tight opacity-40 font-mono"
+              >apparel.co</span
+            >
+          </div>
         </div>
-      </div>
+      </AnimatedContent>
 
       <!-- Card 2: Stat -->
-      <div
-        class="bg-white/5 border border-white/5 rounded-3xl p-8 flex flex-col justify-between min-h-[220px]"
-      >
-        <div>
-          <p class="text-4xl font-extrabold text-white tracking-tight">
-            3x Lebih
-          </p>
-          <p class="text-sm text-foreground/60 mt-2">
-            Konsistensi Posting & Konten
-          </p>
-        </div>
+      <AnimatedContent distance={60} direction="vertical" duration={0.8} delay={0.12} threshold={0.1} className="h-full" client:visible>
         <div
-          class="flex items-center justify-between mt-auto pt-6 border-t border-white/5"
+          class="card-glass p-8 flex flex-col justify-between min-h-[220px] h-full"
         >
-          <span
-            class="text-sm font-semibold tracking-wider font-mono opacity-50"
-            >KONSISTENSI</span
+          <div>
+            <p class="text-4xl font-extrabold text-white tracking-tight">
+              <CountUp from={0} to={3} duration={1.8} client:visible />x Lebih
+            </p>
+            <p class="text-sm text-foreground/60 mt-2">
+              Konsisten & Gak Pernah Bolong Posting
+            </p>
+          </div>
+          <div
+            class="flex items-center justify-between mt-auto pt-6 border-t border-white/5"
           >
+            <span
+              class="text-sm font-semibold tracking-wider font-mono opacity-50"
+              >KONSISTENSI</span
+            >
+          </div>
         </div>
-      </div>
+      </AnimatedContent>
 
       <!-- Card 3: Stat -->
-      <div
-        class="bg-white/5 border border-white/5 rounded-3xl p-8 flex flex-col justify-between min-h-[220px]"
-      >
-        <div>
-          <p class="text-4xl font-extrabold text-white tracking-tight">+280%</p>
-          <p class="text-sm text-foreground/60 mt-2">
-            Interaksi & Engagement Rate
-          </p>
-        </div>
+      <AnimatedContent distance={60} direction="vertical" duration={0.8} delay={0.2} threshold={0.1} className="h-full" client:visible>
         <div
-          class="flex items-center justify-between mt-auto pt-6 border-t border-white/5"
+          class="card-glass p-8 flex flex-col justify-between min-h-[220px] h-full"
         >
-          <span
-            class="text-sm font-semibold tracking-wider font-mono opacity-50"
-            >INTERAKSI</span
+          <div>
+            <p class="text-4xl font-extrabold text-[#33aacc] tracking-tight">
+              +<CountUp from={0} to={280} duration={2.2} client:visible />%
+            </p>
+            <p class="text-sm text-foreground/60 mt-2">
+              Lonjakan Interaksi & Komen Aktif
+            </p>
+          </div>
+          <div
+            class="flex items-center justify-between mt-auto pt-6 border-t border-white/5"
           >
+            <span
+              class="text-sm font-semibold tracking-wider font-mono opacity-50"
+              >INTERAKSI</span
+            >
+          </div>
         </div>
-      </div>
+      </AnimatedContent>
 
       <!-- Card 4: Ranking -->
-      <div
-        class="bg-white/5 border border-white/5 rounded-3xl p-8 flex flex-col justify-between min-h-[220px]"
-      >
-        <div>
-          <p class="text-4xl font-extrabold text-white tracking-tight">100%</p>
-          <p class="text-sm text-foreground/60 mt-2">
-            Peduli Terhadap Brand Value Anda
-          </p>
+      <AnimatedContent distance={60} direction="vertical" duration={0.8} delay={0.28} threshold={0.1} className="h-full" client:visible>
+        <div
+          class="card-glass p-8 flex flex-col justify-between min-h-[220px] h-full"
+        >
+          <div>
+            <p class="text-4xl font-extrabold text-white tracking-tight">
+              <CountUp from={0} to={100} duration={2} client:visible />%
+            </p>
+            <p class="text-sm text-foreground/60 mt-2">
+              Peduli Brand Value & Anti-Template
+            </p>
+          </div>
+          <div class="mt-auto pt-6 border-t border-white/5">
+            <p class="text-sm font-semibold text-accent">
+              Bukan Sekadar Upload Terus Kabur
+            </p>
+          </div>
         </div>
-        <div class="mt-auto pt-6 border-t border-white/5">
-          <p class="text-sm font-semibold text-accent">
-            Bukan Sekadar Posting Konten
-          </p>
-        </div>
-      </div>
+      </AnimatedContent>
 
       <!-- Card 5: Case Summary -->
-      <div
-        class="lg:col-span-3 bg-white/5 border border-white/5 rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[200px]"
-      >
-        <p
-          class="text-lg sm:text-xl font-bold leading-relaxed text-foreground/90"
-        >
-          Kami mendesain ulang strategi visual @visionema_net di Instagram demi
-          memperlihatkan dedikasi kami pada efisiensi, kreativitas adaptif, dan
-          stabilitas branding.
-        </p>
+      <AnimatedContent distance={60} direction="vertical" duration={0.8} delay={0.36} threshold={0.1} className="lg:col-span-3 h-full" client:visible>
         <div
-          class="flex items-center justify-between mt-8 border-t border-white/5 pt-6"
+          class="card-glass p-8 sm:p-10 flex flex-col justify-between min-h-[200px] h-full"
         >
-          <span class="text-lg font-bold tracking-tight text-white font-mono"
-            >@visionema_net</span
+          <p
+            class="text-lg sm:text-xl font-bold leading-relaxed text-foreground/90"
           >
+            Dedikasi kita simpel: bikin konten yang gak cuma lewat selintas di feed, tapi nempel di ingatan audiens dan bikin mereka mau kenal lebih deket sama brand lu.
+          </p>
+          <div
+            class="flex items-center justify-between mt-8 border-t border-white/5 pt-6"
+          >
+            <span class="text-lg font-bold tracking-tight text-white font-mono"
+              >@visionema_net</span
+            >
+          </div>
         </div>
-      </div>
+      </AnimatedContent>
     </div>
   </div>
 </section>

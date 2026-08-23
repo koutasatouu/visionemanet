@@ -70,8 +70,8 @@ void main(){
     
     // Visionema brand color palette
     vec3 colorBg = vec3(0.055, 0.059, 0.129);
-    vec3 colorOrange = vec3(1.0, 0.439, 0.0);
-    vec3 colorYellow = vec3(0.988, 0.753, 0.0);
+    vec3 colorOrange = vec3(0.20, 0.667, 0.933);
+    vec3 colorYellow = vec3(0.867, 1.0, 1.0);
     
     // Map CPPN pattern channels to create a smooth transition between theme colors
     vec3 themeCol = mix(colorBg, colorOrange, col.r * 0.85);

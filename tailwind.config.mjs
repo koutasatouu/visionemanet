@@ -11,6 +11,10 @@ export default {
           DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
           foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
         },
+        accent: {
+          DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
+          yellow: 'hsl(var(--accent-yellow) / <alpha-value>)',
+        },
       },
       fontFamily: {
         sans: ['MADE Tommy', 'Geist Sans', 'sans-serif'],

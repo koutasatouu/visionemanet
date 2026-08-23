@@ -11,20 +11,20 @@ import Footer from '../components/Footer.astro';
 
 const faqs = [
   {
-    question: "Apa bedanya Visionema.net dengan agensi media sosial lainnya?",
-    answer: "Kami tidak sekadar memposting konten terjadwal di akun Anda. Kami melakukan analisis audiens mendalam, meriset hook penulisan skrip video terarah (untuk konten estetis maupun naratif), dan memprioritaskan bagaimana brand value Anda dipandang oleh audiens untuk memaksimalkan ROI dan interaksi."
+    question: "Emang apa bedanya Visionema.net sama agensi sosmed lain?",
+    answer: "Kita anti banget sama yang namanya 'asal upload terus ditinggal'. Di sini kita kulik target audiens lu, bikin hook skrip yang bikin orang gak scroll ngelewatin, dan racik visual aesthetic yang langsung ngangkat kelas brand lu!"
   },
   {
-    question: "Berapa lama kontrak kerja sama minimal?",
-    answer: "Untuk paket bulanan, kerja sama dilakukan per bulan dengan evaluasi kinerja rutin di akhir bulan. Kami merekomendasikan kerja sama minimal 3 bulan untuk melihat pertumbuhan grafik performa konten yang matang."
+    question: "Sistem kerja samanya gimana? Harus kontrak panjang?",
+    answer: "Sistemnya fleksibel bulanan dengan evaluasi performa bareng di akhir periode. Tapi kita saranin minimal 3 bulan ya, biar racikan strategi dan pertumbuhan grafiknya keliatan nampol!"
   },
   {
-    question: "Apakah materi konten (video/foto) disediakan oleh klien?",
-    answer: "Tergantung kesepakatan. Pada tipe konten B-Roll aesthetic, tim kami dapat mengarahkan pengambilan aset video secara remote oleh tim internal Anda, atau kami memproses footage orisinal/stock berlisensi yang telah disiapkan sebelumnya."
+    question: "Materi video & foto disiapin dari siapa nih?",
+    answer: "Fleksibel banget! Buat tipe video B-Roll aesthetic, kita bisa arahin tim internal lu buat ambil footage praktis via HP dengan arahan angle dari kita, atau kita bantu racik dari stock video berlisensi yang ciamik."
   },
   {
-    question: "Berapa lama proses pembuatan konten hingga tayang?",
-    answer: "Proses perencanaan pilar konten, pembuatan skrip, desain carousel, dan video editing rata-rata membutuhkan waktu 7-10 hari kerja sebelum jadwal tayang perdana di bulan berjalan demi memastikan kualitas visual terbaik."
+    question: "Dari mulai deal sampe konten pertama tayang butuh berapa lama?",
+    answer: "Rata-rata 7–10 hari kerja. Waktu ini kita pake buat riset mendalam, nyusun pilar konten, nulis skrip, dan bikin desain visual terbaik biar pas hari H launching langsung pecah!"
   }
 ];
 ---
@@ -44,9 +44,12 @@ const faqs = [
     <!-- Interactive FAQ Section -->
     <section class="bg-background py-24 border-t border-foreground/5">
       <div class="px-6 sm:px-12 lg:px-24 max-w-4xl mx-auto">
-        <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground text-center mb-16">
-          Pertanyaan Umum (FAQ)
-        </h2>
+        <div class="text-center mb-16">
+          <span class="text-xs uppercase font-mono tracking-widest text-accent font-bold">Paling Sering Ditanyain</span>
+          <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mt-3">
+            Pertanyaan Umum (FAQ)
+          </h2>
+        </div>
         <FaqAccordion items={faqs} client:visible />
       </div>
     </section>

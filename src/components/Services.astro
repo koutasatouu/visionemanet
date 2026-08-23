@@ -1,20 +1,20 @@
 ---
-const services = [
+const processes = [
   {
-    title: "Pengalaman Digital",
-    desc: "Merancang website dan aplikasi web yang indah, cepat, dan berkonversi tinggi menggunakan teknologi modern.",
+    title: "Pra Produksi",
+    desc: "Biar gak asal ngonten, kita kulik audiens lu, susun pilar konten yang pas, sampe racik hook skrip yang bikin orang gak skip.",
   },
   {
-    title: "Identitas Brand",
-    desc: "Mendesain logo, sistem desain, warna, tipografi, dan pedoman brand yang membuat bisnis Anda unik dan menonjol.",
+    title: "Produksi",
+    desc: "Eksekusi visual gak main-main! Dari shoot sinematik, B-Roll aesthetic yang memanjakan mata, sampe desain carousel berkelas.",
   },
   {
-    title: "Arahan Kreatif",
-    desc: "Mengarahkan estetika kreatif kampanye iklan, konten media sosial, dan visual produk agar tepat sasaran.",
+    title: "Post Produksi",
+    desc: "Tahap sulap konten! Video editing dinamis, grading warna cakep, sound design pas, plus caption & hashtag yang relevan abis.",
   },
   {
-    title: "Desain Produk",
-    desc: "Membuat prototipe, melakukan riset pengguna, wireframing, dan mengoptimalkan UI/UX platform digital Anda.",
+    title: "Maintenance",
+    desc: "Jadwal posting aman terjaga, DM & komentar kita pantau ramah, plus laporan performa bulanan biar tahu progres naiknya.",
   },
 ];
 ---
@@ -28,32 +28,34 @@ const services = [
   >
     <!-- Large statement heading -->
     <div
-      class="flex min-h-[40vh] items-center justify-center text-center py-12"
+      class="flex min-h-[25vh] items-center justify-center text-center py-10"
     >
       <h2
-        class="text-[clamp(2rem,5vw,5.5rem)] font-extrabold leading-[1.1] tracking-tight text-foreground max-w-4xl"
+        class="text-[clamp(2.25rem,5vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-foreground max-w-4xl"
       >
-        Kami merancang konten yang <span
-          class="font-serif italic text-muted-foreground/80 font-normal"
-          >memikat</span
-        >. Membangun brand yang <span
-          class="font-serif italic text-muted-foreground/80 font-normal"
-          >bertahan lama</span
-        >.
+        Apa sih yang <span
+          class="font-serif italic bg-gradient-to-r from-accent to-accent-yellow bg-clip-text font-normal"
+          >kami kerjain?</span
+        >
       </h2>
     </div>
 
     <!-- Hover menu list -->
-    <div class="w-full mt-12 border-t border-white/10 divide-y divide-white/10">
+    <div class="w-full mt-8 border-t border-white/10 divide-y divide-white/10">
       {
-        services.map((svc) => (
+        processes.map((proc, index) => (
           <div class="group relative overflow-hidden transition-all duration-300">
             <div class="flex flex-col md:flex-row md:items-center justify-between cursor-pointer px-4 py-8 sm:px-8 md:py-10 hover:bg-white/[0.02]">
-              <span class="text-[clamp(1.5rem,3vw,3.25rem)] font-light tracking-tight text-foreground transition-transform duration-300 group-hover:translate-x-2">
-                {svc.title}
-              </span>
-              <p class="mt-4 md:mt-0 text-foreground/60 max-w-md text-base leading-relaxed md:opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-                {svc.desc}
+              <div class="flex items-center gap-4">
+                <span class="text-lg font-mono font-bold uppercase tracking-widest text-accent/70">
+                  0{index + 1}
+                </span>
+                <span class="text-[clamp(1.5rem,3vw,3.25rem)] font-bold tracking-tight text-foreground transition-transform duration-300 group-hover:translate-x-2">
+                  {proc.title}
+                </span>
+              </div>
+              <p class="mt-4 md:mt-0 text-foreground/75 max-w-md text-base leading-relaxed md:opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                {proc.desc}
               </p>
             </div>
           </div>

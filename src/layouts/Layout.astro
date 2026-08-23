@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 interface Props {
   title?: string;
   description?: string;
@@ -40,99 +42,6 @@ const {
     </div>
   </body>
 </html>
-
-<style is:global>
-  @font-face {
-    font-family: "MADE Tommy";
-    src: url("/src/assets/font/made_tommy/MADE TOMMY Light_PERSONAL USE.otf")
-      format("opentype");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "MADE Tommy";
-    src: url("/src/assets/font/made_tommy/MADE TOMMY Regular_PERSONAL USE.otf")
-      format("opentype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "MADE Tommy";
-    src: url("/src/assets/font/made_tommy/MADE TOMMY Medium_PERSONAL USE.otf")
-      format("opentype");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "MADE Tommy";
-    src: url("/src/assets/font/made_tommy/MADE TOMMY Bold_PERSONAL USE.otf")
-      format("opentype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "MADE Tommy";
-    src: url("/src/assets/font/made_tommy/MADE TOMMY ExtraBold_PERSONAL USE.otf")
-      format("opentype");
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  :root {
-    /* Visionema Color Palette (Default Dark Mode) */
-    --background: 240 35% 10%; /* #101023 - Deep kebiruan sedikit lebih terang */
-    --foreground: 180 100% 97%; /* #efffff - Putih kebiruan terang */
-    --muted: 240 28% 16%; /* Kartu / container sedikit lebih kontras dan terang */
-    --muted-foreground: 206 54% 75%; /* Biru muda */
-    --accent: 26 100% 50%; /* #ff7000 (Oranye) */
-    --accent-yellow: 46 100% 52%; /* #fcc000 */
-  }
-
-  html {
-    /* Lenis smooth scrolling takes care of scroll behavior */
-  }
-
-  /* Lenis support styles */
-  html.lenis,
-  html.lenis body {
-    height: auto;
-  }
-  .lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-  .lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-  .lenis-stopped {
-    overflow: hidden;
-  }
-  .lenis-scrolling iframe {
-    pointer-events: none;
-  }
-
-  body {
-    font-family: "MADE Tommy", "Plus Jakarta Sans", "Geist Sans", sans-serif;
-  }
-
-  .skip-to-content {
-    position: absolute;
-    left: -9999px;
-    z-index: 999;
-    padding: 1rem;
-    background: #ff7000;
-    color: white;
-  }
-  .skip-to-content:focus {
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0;
-  }
-</style>
 
 <script>
   import Lenis from "lenis";
