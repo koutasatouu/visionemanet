@@ -26,10 +26,10 @@ pnpm-debug.log*
 .env.production
 .env.development
 
-# large media assets and archives
+# large media archives
 *.mov
-*.mp4
 *.zip
+!src/assets/video/*.mp4
 **/VISIONEMA.NET_ANIMASI LOGO/
 **/VISIONEMA.NET_FINAL LOGO/
 **/VISIONEMA.NET_LOGO CONSTRUCTION BRIDGE/
