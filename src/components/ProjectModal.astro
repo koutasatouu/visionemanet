@@ -16,13 +16,13 @@
     </button>
 
     <!-- Modal Content: 2-Column Grid (Left: Video, Right: Info) -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center overflow-y-auto pr-1">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center overflow-y-auto pr-1 my-auto">
       <!-- Left: Media Container -->
-      <div class="md:col-span-6 flex items-center justify-center">
-        <div id="modal-media-wrapper" class="relative w-full max-h-[60vh] rounded-2xl overflow-hidden bg-black border border-white/10 flex items-center justify-center group shadow-xl">
+      <div class="md:col-span-6 flex items-center justify-center w-full">
+        <div id="modal-media-wrapper" class="relative max-w-full max-h-[65vh] rounded-2xl overflow-hidden bg-black/40 border border-white/10 flex items-center justify-center group shadow-xl">
           <video 
             id="modal-video" 
-            class="hidden w-full h-full max-h-[60vh] object-cover rounded-2xl" 
+            class="hidden w-full h-auto max-h-[65vh] object-contain rounded-2xl" 
             playsinline 
             controls 
             preload="metadata"
@@ -109,6 +109,8 @@
       if (modalDesc) modalDesc.textContent = data.desc;
 
       if (data.video && modalVideo) {
+        // Reset aspect-ratio temporarily until metadata is ready or use natural video dimensions
+        if (modalMediaWrapper) modalMediaWrapper.style.aspectRatio = '';
         modalVideo.src = data.video;
         modalVideo.muted = false;
         modalVideo.currentTime = 0;
@@ -116,7 +118,9 @@
         modalPlayBtn?.classList.remove('hidden');
         modalPlaceholder?.classList.add('hidden');
         modalVideo.load();
-        adjustVideoAspectRatio();
+        if (modalVideo.readyState >= 1) {
+          adjustVideoAspectRatio();
+        }
       } else {
         if (modalMediaWrapper) modalMediaWrapper.style.aspectRatio = '4 / 3';
         if (modalVideo) {

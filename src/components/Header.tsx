@@ -7,6 +7,7 @@ const menuItems = [
   { label: 'Portofolio', ariaLabel: 'Portofolio', link: '#projects' },
   { label: 'Paket Layanan', ariaLabel: 'Paket Layanan', link: '#packages' },
   { label: 'Tentang Kami', ariaLabel: 'Tentang Kami', link: '#about' },
+  { label: 'Tim Kami', ariaLabel: 'Tim Kami', link: '#team' },
   { label: 'Hubungi Kami', ariaLabel: 'Hubungi Kami', link: '#contact' },
 ];
 
