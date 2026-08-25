@@ -8,8 +8,8 @@ import team6 from '../assets/team/team6.webp';
 import team7 from '../assets/team/team7.webp';
 import AnimatedContent from './reactbits/AnimatedContent';
 
-// Team members images in exact order (team1 to team7 + 2 coming soon slots)
-const teamList = [
+// Team members images in exact order (team1 to team7 + exactly 1 coming soon slot)
+const originalList = [
   { image: team1, alt: "Visionema Team Member 1" },
   { image: team2, alt: "Visionema Team Member 2" },
   { image: team3, alt: "Visionema Team Member 3" },
@@ -18,8 +18,10 @@ const teamList = [
   { image: team6, alt: "Visionema Team Member 6" },
   { image: team7, alt: "Visionema Team Member 7" },
   { isPlaceholder: true, label: "Coming Soon" },
-  { isPlaceholder: true, label: "Coming Soon" },
 ];
+
+// Tripled list to enable seamless infinite looping without dead-ends
+const infiniteList = [...originalList, ...originalList, ...originalList];
 ---
 
 <section id="team" class="py-20 bg-transparent relative border-t border-white/5 overflow-hidden">
@@ -66,42 +68,45 @@ const teamList = [
       </div>
     </AnimatedContent>
 
-    <!-- Transparent Carousel Track (Shows 5 photos per view on desktop, pure images) -->
-    <div
-      id="team-carousel-track"
-      class="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 scroll-smooth select-none cursor-grab active:cursor-grabbing"
-      style="scrollbar-width: none; -ms-overflow-style: none;"
-    >
-      {teamList.map((item) => (
-        <div 
-          class="shrink-0 snap-start w-[70%] sm:w-[38%] md:w-[28%] lg:w-[calc((100%-4*1.25rem)/5)]"
-        >
-          {item.isPlaceholder ? (
-            <!-- Minimal transparent placeholder -->
-            <div class="group relative aspect-4/5 w-full overflow-hidden rounded-2xl border border-dashed border-white/15 bg-transparent flex flex-col items-center justify-center p-4 text-center transition-all duration-300 hover:border-blue-500/40">
-              <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2.5 group-hover:scale-110 group-hover:border-blue-500/30 transition-all duration-300">
-                <svg class="w-4 h-4 text-foreground/40 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
+    <!-- Carousel Container -->
+    <div class="relative w-full overflow-visible">
+      <!-- Transparent Carousel Track with clean seamless scroll and natural side fade -->
+      <div
+        id="team-carousel-track"
+        class="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 scroll-smooth select-none cursor-grab active:cursor-grabbing mask-edge-fade"
+        style="scrollbar-width: none; -ms-overflow-style: none;"
+      >
+        {infiniteList.map((item) => (
+          <div 
+            class="team-carousel-slide shrink-0 snap-center sm:snap-start w-[76%] sm:w-[45%] md:w-[30%] lg:w-[calc((100%-4*1.25rem)/5)] transition-all duration-500 opacity-60 sm:opacity-100 scale-95 sm:scale-100 blur-[1.5px] sm:blur-none"
+          >
+            {item.isPlaceholder ? (
+              <!-- Minimal transparent placeholder for 1 upcoming member -->
+              <div class="relative aspect-4/5 w-full overflow-hidden rounded-2xl border border-dashed border-white/15 bg-transparent flex flex-col items-center justify-center p-4 text-center">
+                <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2.5">
+                  <svg class="w-4 h-4 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </div>
+                <span class="text-[11px] font-mono uppercase tracking-wider text-foreground/40 font-bold">
+                  {item.label}
+                </span>
               </div>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-foreground/40 group-hover:text-blue-400 transition-colors font-bold">
-                {item.label}
-              </span>
-            </div>
-          ) : (
-            <!-- Pure Image Only -->
-            <div class="group relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-transparent transition-all duration-300 hover:scale-[1.02]">
-              <img
-                src={item.image?.src}
-                alt={item.alt}
-                loading="lazy"
-                draggable="false"
-                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out pointer-events-none"
-              />
-            </div>
-          )}
-        </div>
-      ))}
+            ) : (
+              <!-- Pure Image Only -->
+              <div class="relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-transparent">
+                <img
+                  src={item.image?.src}
+                  alt={item.alt}
+                  loading="lazy"
+                  draggable="false"
+                  class="w-full h-full object-cover object-center pointer-events-none"
+                />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
 
   </div>
@@ -115,22 +120,48 @@ const teamList = [
 
     if (!track || !prevBtn || !nextBtn) return;
 
+    const originalCount = 8; // 7 team + 1 placeholder
+
     const getScrollStep = () => {
       const firstChild = track.firstElementChild as HTMLElement | null;
       if (!firstChild) return 300;
-      const gap = 20; // 1.25rem gap
+      const gap = window.innerWidth >= 640 ? 20 : 16;
       return firstChild.offsetWidth + gap;
     };
 
+    // Initialize to middle set for infinite loop illusion
+    const setInitialPosition = () => {
+      const step = getScrollStep();
+      const middleOffset = step * originalCount;
+      if (track.scrollLeft === 0) {
+        track.scrollLeft = middleOffset;
+      }
+    };
+
+    // Check & adjust boundary for infinite scroll
+    const checkInfiniteBounds = () => {
+      const step = getScrollStep();
+      const singleSetWidth = step * originalCount;
+      if (track.scrollLeft <= 10) {
+        track.scrollLeft += singleSetWidth;
+      } else if (track.scrollLeft >= singleSetWidth * 2 - 10) {
+        track.scrollLeft -= singleSetWidth;
+      }
+    };
+
+    setTimeout(setInitialPosition, 100);
+
     prevBtn.addEventListener('click', () => {
+      checkInfiniteBounds();
       track.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
     });
 
     nextBtn.addEventListener('click', () => {
+      checkInfiniteBounds();
       track.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
     });
 
-    // Touch & Drag-to-scroll support for ultra fluid experience
+    // Touch & Drag-to-scroll support with infinite boundary normalization
     let isDown = false;
     let startX = 0;
     let scrollLeft = 0;
@@ -147,6 +178,7 @@ const teamList = [
 
     track.addEventListener('mouseup', () => {
       isDown = false;
+      checkInfiniteBounds();
     });
 
     track.addEventListener('mousemove', (e) => {
@@ -155,6 +187,58 @@ const teamList = [
       const x = e.pageX - track.offsetLeft;
       const walk = (x - startX) * 1.5;
       track.scrollLeft = scrollLeft - walk;
+    });
+
+    // Highlight active card on mobile (unblur center card, softly blur adjacent cards)
+    const slides = track.querySelectorAll('.team-carousel-slide');
+    const updateActiveSlide = () => {
+      if (window.innerWidth >= 640) {
+        slides.forEach(slide => {
+          slide.classList.remove('opacity-60', 'blur-[1.5px]', 'scale-95');
+          slide.classList.add('opacity-100', 'blur-none', 'scale-100');
+        });
+        return;
+      }
+
+      const trackCenter = track.getBoundingClientRect().left + track.offsetWidth / 2;
+
+      let closestSlide: HTMLElement | null = null;
+      let minDistance = Infinity;
+
+      slides.forEach((slideEl) => {
+        const slide = slideEl as HTMLElement;
+        const rect = slide.getBoundingClientRect();
+        const slideCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(trackCenter - slideCenter);
+
+        if (dist < minDistance) {
+          minDistance = dist;
+          closestSlide = slide;
+        }
+      });
+
+      slides.forEach((slideEl) => {
+        const slide = slideEl as HTMLElement;
+        if (slide === closestSlide) {
+          slide.classList.remove('opacity-60', 'blur-[1.5px]', 'scale-95');
+          slide.classList.add('opacity-100', 'blur-none', 'scale-100');
+        } else {
+          slide.classList.remove('opacity-100', 'blur-none', 'scale-100');
+          slide.classList.add('opacity-60', 'blur-[1.5px]', 'scale-95');
+        }
+      });
+    };
+
+    track.addEventListener('scroll', () => {
+      window.requestAnimationFrame(updateActiveSlide);
+    }, { passive: true });
+
+    setTimeout(updateActiveSlide, 150);
+
+    // Adjust on window resize
+    window.addEventListener('resize', () => {
+      setInitialPosition();
+      updateActiveSlide();
     });
   }
 
