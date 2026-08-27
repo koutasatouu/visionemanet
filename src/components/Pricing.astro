@@ -3,74 +3,74 @@ const packages = [
   {
     name: "Mulai Aja Dulu...",
     price: "Rp 2.699k",
-    tagline: "Konsisten & Bangun Presence Awal",
+    tagline: "Membangun Kehadiran & Konsistensi Digital",
     popular: false,
     content: [
-      "8 Video Aesthetic",
-      "4 Foto Feed Berkualitas",
-      "Desain / Carousel Menarik"
+      "8 Video Estetik",
+      "4 Foto Feed Berkualitas Tinggi",
+      "Desain Carousel Interaktif"
     ],
     types: [
       "Aesthetic B-Roll (Tanpa Naskah)"
     ],
     toppings: [
-      "Posting Terjadwal & Caption Rapi",
-      "Setup Profil Awal & Bio",
-      "Laporan Bulanan Ringkas"
+      "Jadwal Publikasi & Copywriting Rapi",
+      "Setup & Optimasi Profil Awal",
+      "Laporan Performa Bulanan Ringkas"
     ]
   },
   {
     name: "Level Up!",
     price: "Rp 4.699k",
-    tagline: "Paling Favorit! Engagement & Konversi Meledak",
+    tagline: "Paling Favorit! Tingkatkan Engagement & Konversi",
     popular: true,
     content: [
-      "12 Video Hook Nendang",
-      "8 Foto Feed Estetik",
-      "2 Desain / Carousel Bernilai"
+      "12 Video Pendek dengan Hook Kuat",
+      "8 Foto Feed Profesional",
+      "2 Desain Carousel Edukatif"
     ],
     types: [
-      "Aesthetic B-Roll (Tanpa Naskah)",
-      "Skrip Strategis (Hook & Call to Action)"
+      "Aesthetic B-Roll Cinematic",
+      "Naskah Strategis (Hook & Call to Action)"
     ],
     toppings: [
-      "Posting Terjadwal & Caption Menjual",
-      "Setup & Optimasi Profil",
+      "Jadwal Publikasi & Copywriting Menjual",
+      "Optimasi Profil & Branding Terarah",
       "Laporan Bulanan Komprehensif",
-      "Account Handling Penuh",
-      "Admin Ramah untuk DM & Komentar",
+      "Pengelolaan Akun Menyeluruh",
+      "Manajemen Respons Ramah untuk DM & Komentar",
       "Analisis Performa & Strategi Bulanan",
-      "Pilar Strategi Konten Custom",
+      "Pilar Konten Kustom Sesuai Niche",
       "Interaksi Proaktif ke Target Audiens",
-      "Update SEO Sosmed & Sorotan"
+      "Optimasi SEO Media Sosial & Sorotan"
     ]
   },
   {
     name: "Scale Up!",
     price: "Rp 8.699k",
-    tagline: "Gaspol! Dominasi Pasar & Naikin Omzet",
+    tagline: "Maksimal! Dominasi Pasar & Tingkatkan Penjualan",
     popular: false,
     content: [
-      "20 Video Sinematik & Viral",
-      "12 Foto Feed Kelas Atas",
-      "4 Desain / Carousel Edukatif"
+      "20 Video Sinematik Premium",
+      "12 Foto Feed Eksklusif",
+      "4 Desain Carousel Edukatif Mendalam"
     ],
     types: [
-      "Aesthetic B-Roll (Tanpa Naskah)",
-      "Skrip Strategis (Hook & Call to Action)",
-      "Naskah Naratif & Storytelling Penuh"
+      "Aesthetic B-Roll Cinematic",
+      "Naskah Strategis & Storytelling Mendalam",
+      "Arahan Visual & Brand Narrative"
     ],
     toppings: [
-      "Posting Terjadwal & Copywriting Menjual",
-      "Setup & Branding Profil Komplit",
-      "Laporan Bulanan Mendalam",
-      "Account Handling Eksklusif",
-      "Admin Responsif untuk DM & Komentar",
-      "Analisis Tren & Strategi Bertumbuh",
-      "Pilar Strategi Konten Komprehensif",
+      "Jadwal Publikasi & Copywriting Eksklusif",
+      "Setup & Revamp Branding Komprehensif",
+      "Laporan Analitik Mendalam & Rekomendasi",
+      "Pengelolaan Akun Dedicated",
+      "Manajemen Respons Cepat DM & Komentar",
+      "Riset Tren & Strategi Bertumbuh",
+      "Pilar Konten Komprehensif",
       "Interaksi Proaktif Maksimal",
-      "Update SEO Sosmed & Highlight",
-      "Dashboard Pantau KPI",
+      "Optimasi SEO Media Sosial Lengkap",
+      "Dashboard Monitoring KPI",
       "Konsultasi & Audit Brand Bulanan"
     ]
   }
@@ -82,10 +82,10 @@ const packages = [
     <div class="text-center max-w-2xl mx-auto mb-16">
       <span class="text-xs uppercase font-mono tracking-widest text-blue-400 font-bold">Investasi Pintar</span>
       <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground mt-4">
-        Marketing adalah Investasi, Bukan Buang Duit!
+        Paket Pengelolaan <span class="font-serif italic font-normal text-foreground">Media Sosial</span>
       </h2>
       <p class="text-foreground/75 mt-4 text-base sm:text-lg">
-        Pilih paket yang paling pas buat ngebutin pertumbuhan brand lu sekarang.
+        Pilih paket yang paling sesuai untuk mengakselerasi kehadiran dan pertumbuhan brand Anda.
       </p>
     </div>
 
@@ -142,7 +142,7 @@ const packages = [
                   </div>
 
                   <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-foreground/40 mb-3 font-mono">Layanan / Ekstra</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-foreground/40 mb-3 font-mono">Layanan & Fasilitas</h4>
                     <ul class="space-y-2 text-xs text-foreground/75 font-semibold">
                       {pkg.toppings.map((item) => (
                         <li class="flex items-start gap-2">
@@ -159,7 +159,7 @@ const packages = [
 
               <div class="mt-8 pt-6 border-t border-white/10">
                 <a 
-                  href="https://wa.me/6281234567890" 
+                  href={`https://wa.me/6281234567890?text=${encodeURIComponent(`Halo Visionema, saya tertarik untuk berkonsultasi mengenai paket ${pkg.name}.`)}`} 
                   target="_blank"
                   rel="noopener noreferrer"
                   class={pkg.popular ? 'group btn-cta-orange w-full py-4 text-base' : 'group btn-card-standard w-full'}
