@@ -1,0 +1,182 @@
+---
+import AnimatedContent from "./reactbits/AnimatedContent";
+
+const setupFeatures = [
+  "Custom Design Responsive (Mobile, Tablet, Desktop)",
+  "High-Converting Landing Page (Home, Produk/Layanan, Kontak)",
+  "Copywriting Menjual & Call-To-Action Terarah",
+  "Direct WhatsApp Checkout & Tombol Interaksi Cepat",
+  "Loading Super Cepat (Optimasi Script, Gambar & Asset)",
+  "Integrasi Social Media, Google Maps & Link Bio",
+  "Setup Awal Domain, Hosting & SSL Security",
+  "Basic On-Page SEO agar Mudah Ditemukan di Google"
+];
+
+const monthlyFeatures = [
+  "Update Konten Rutin (Ganti Banner Promo, Menu/Katalog & Portfolio)",
+  "Monitoring Server & Uptime Web 24/7 (Anti-Down)",
+  "Backup Data Berkala & Proteksi Keamanan SSL Terjaga",
+  "Optimasi Kecepatan Loading & Cache Rutin",
+  "Dedicated WhatsApp Tech Support (Fast Response)",
+  "Perbaikan Bug & Kendala Teknis Kapan Saja",
+  "Optimasi SEO Berkelanjutan & Pemantauan Performa",
+  "Laporan Ringkasan Kunjungan Traffic Bulanan"
+];
+
+const waMessage = "Halo Visionema, saya tertarik memesan paket All-in-One Website (1jt Setup + 500k/bulan Maintenance).";
+---
+
+<section id="web-packages" class="py-20 bg-background relative border-t border-white/5 overflow-hidden">
+  <div class="px-6 sm:px-12 lg:px-24 max-w-360 2xl:max-w-450 3xl:max-w-550 mx-auto relative z-10">
+    
+    <!-- Section Header -->
+    <AnimatedContent distance={40} direction="vertical" duration={0.7} threshold={0.15} client:visible>
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs uppercase font-mono tracking-widest text-blue-400 font-bold block mb-3">
+          Paket Spesial Website
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+          All-in-One <span class="font-serif italic font-normal text-foreground">Web & Maintenance</span>
+        </h2>
+        <p class="text-foreground/75 mt-4 text-base sm:text-lg leading-relaxed">
+          Gak cuma bikinin website estetik, kita juga rawat dan update performanya tiap bulan biar bisnis lu jalan lancar tanpa repot sewa developer mahal!
+        </p>
+      </div>
+    </AnimatedContent>
+
+    <!-- Unified Master Pricing Card -->
+    <AnimatedContent distance={50} direction="vertical" duration={0.8} threshold={0.1} className="max-w-5xl mx-auto" client:visible>
+      <div class="relative rounded-[2.5rem] p-8 sm:p-12 lg:p-14 bg-gradient-to-b from-blue-950/30 via-background to-background border-2 border-blue-500/30 shadow-2xl shadow-blue-500/10 overflow-hidden">
+        
+        <!-- Ambient Top Glow -->
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Top Header & Price Breakdown -->
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-10 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                FULL SERVICE BUNDLE
+              </span>
+              <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-sm">
+                Paket Komplit
+              </span>
+            </div>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+              Website Siap Pakai + Full Rawat
+            </h3>
+            <p class="text-sm sm:text-base font-semibold text-blue-400 mt-2">
+              Solusi tuntas: bikin web profesional di awal, performa & konten kita jaga setiap bulan.
+            </p>
+          </div>
+
+          <!-- Price Tag Container -->
+          <div class="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end justify-center gap-2 p-5 rounded-2xl bg-white/[0.03] border border-white/10 shrink-0">
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+                Rp 1.000.000
+              </span>
+              <span class="text-xs font-semibold text-foreground/60">
+                (Setup Awal)
+              </span>
+            </div>
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-xl sm:text-2xl font-bold text-blue-400 tracking-tight">
+                + Rp 500.000
+              </span>
+              <span class="text-xs font-semibold text-blue-300/70">
+                / bulan (Maintenance)
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-Column Feature Breakdown -->
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 py-10">
+          
+          <!-- Column 1: Setup Phase (1jt) -->
+          <div class="p-6 sm:p-7 rounded-3xl bg-white/[0.02] border border-white/5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">
+                  FASE 01 — SETUP & PEMBUATAN
+                </span>
+                <span class="text-xs font-semibold text-foreground/60 bg-white/5 px-2.5 py-0.5 rounded-full">
+                  1x di Awal
+                </span>
+              </div>
+              <h4 class="text-xl font-bold text-foreground mb-4">
+                Yang Kamu Dapatkan di Awal:
+              </h4>
+              <ul class="space-y-3">
+                {setupFeatures.map((feature) => (
+                  <li class="flex items-start gap-3 text-sm text-foreground/85">
+                    <div class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg class="w-3 h-3 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                    </div>
+                    <span class="leading-snug">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Column 2: Monthly Care Phase (500k/bln) -->
+          <div class="p-6 sm:p-7 rounded-3xl bg-white/[0.02] border border-white/5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">
+                  FASE 02 — PERAWATAN & GROWTH
+                </span>
+                <span class="text-xs font-semibold text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">
+                  Tiap Bulan
+                </span>
+              </div>
+              <h4 class="text-xl font-bold text-foreground mb-4">
+                Yang Kita Handle Setiap Bulan:
+              </h4>
+              <ul class="space-y-3">
+                {monthlyFeatures.map((feature) => (
+                  <li class="flex items-start gap-3 text-sm text-foreground/85">
+                    <div class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg class="w-3 h-3 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                    </div>
+                    <span class="leading-snug">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom CTA & Trust Note -->
+        <div class="relative z-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <p class="text-xs sm:text-sm text-foreground/70 text-center sm:text-left max-w-md leading-relaxed">
+            🚀 <span class="font-bold text-foreground">Anti Ribet:</span> Tim Visionema yang urus semua kebutuhan teknis, domain, hosting, dan konten web lu.
+          </p>
+          <a
+            href={`https://wa.me/6281234567890?text=${encodeURIComponent(waMessage)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group btn-cta-blue w-full sm:w-auto px-8 sm:px-10 py-4 text-base shrink-0"
+          >
+            <div class="shimmer-sweep"></div>
+            <span class="relative z-20">Konsultasi & Pesan Web Sekarang</span>
+            <span class="btn-arrow-capsule group-hover:text-[#2563eb]">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </AnimatedContent>
+
+  </div>
+</section>

@@ -25,55 +25,57 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
 ---
 
 <section id="team" class="py-20 bg-transparent relative border-t border-white/5 overflow-hidden">
-  <div class="px-6 sm:px-12 lg:px-24 max-w-360 2xl:max-w-450 3xl:max-w-550 mx-auto relative z-10">
+  <div class="max-w-360 2xl:max-w-450 3xl:max-w-550 mx-auto relative z-10">
     
-    <!-- Section Header with Prev/Next Controls -->
-    <AnimatedContent distance={40} direction="vertical" duration={0.7} threshold={0.15} client:visible>
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-        <div>
-          <span class="text-xs uppercase font-mono tracking-widest text-blue-400 font-bold block mb-2">
-            Di Balik Layar
-          </span>
-          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
-            Kenalan Bareng <span class="font-serif italic font-normal text-foreground">Tim Visionema</span>
-          </h2>
-        </div>
-        
-        <!-- Controls & Subtitle -->
-        <div class="flex items-center justify-between md:justify-end gap-6">
-          <p class="text-foreground/75 text-sm sm:text-base max-w-xs leading-relaxed hidden sm:block">
-            Kreator, videografer, desainer, dan strategist kami.
-          </p>
-          <div class="flex items-center gap-3">
-            <button
-              id="team-prev-btn"
-              aria-label="Previous team slide"
-              class="w-11 h-11 rounded-full border border-white/10 bg-white/5 hover:bg-white/15 hover:border-blue-500/50 flex items-center justify-center text-white transition-all duration-300 active:scale-95 cursor-pointer"
-            >
-              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-              </svg>
-            </button>
-            <button
-              id="team-next-btn"
-              aria-label="Next team slide"
-              class="w-11 h-11 rounded-full border border-white/10 bg-white/5 hover:bg-white/15 hover:border-blue-500/50 flex items-center justify-center text-white transition-all duration-300 active:scale-95 cursor-pointer"
-            >
-              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
-            </button>
+    <!-- Section Header with Prev/Next Controls (keeps padding on all screens) -->
+    <div class="px-6 sm:px-12 lg:px-24">
+      <AnimatedContent distance={40} direction="vertical" duration={0.7} threshold={0.15} client:visible>
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-blue-400 font-bold block mb-2">
+              Di Balik Layar
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+              Kenalan Bareng <span class="font-serif italic font-normal text-foreground">Tim Visionema</span>
+            </h2>
+          </div>
+          
+          <!-- Controls & Subtitle -->
+          <div class="flex items-center justify-between md:justify-end gap-6">
+            <p class="text-foreground/75 text-sm sm:text-base max-w-xs leading-relaxed hidden sm:block">
+              Kreator, videografer, desainer, dan strategist kami.
+            </p>
+            <div class="flex items-center gap-3">
+              <button
+                id="team-prev-btn"
+                aria-label="Previous team slide"
+                class="w-11 h-11 rounded-full border border-white/10 bg-white/5 hover:bg-white/15 hover:border-blue-500/50 flex items-center justify-center text-white transition-all duration-300 active:scale-95 cursor-pointer"
+              >
+                <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+              <button
+                id="team-next-btn"
+                aria-label="Next team slide"
+                class="w-11 h-11 rounded-full border border-white/10 bg-white/5 hover:bg-white/15 hover:border-blue-500/50 flex items-center justify-center text-white transition-all duration-300 active:scale-95 cursor-pointer"
+              >
+                <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </AnimatedContent>
+      </AnimatedContent>
+    </div>
 
-    <!-- Carousel Container -->
-    <div class="relative w-full overflow-visible">
+    <!-- Carousel Container (0px horizontal padding on phone, padded on sm and up) -->
+    <div class="relative w-full overflow-visible px-0 sm:px-12 lg:px-24">
       <!-- Transparent Carousel Track with clean seamless scroll and natural side fade -->
       <div
         id="team-carousel-track"
-        class="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 scroll-smooth select-none cursor-grab active:cursor-grabbing mask-edge-fade"
+        class="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-4 sm:px-0 scroll-smooth select-none cursor-grab active:cursor-grabbing"
         style="scrollbar-width: none; -ms-overflow-style: none;"
       >
         {infiniteList.map((item) => (
