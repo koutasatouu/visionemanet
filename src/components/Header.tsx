@@ -12,8 +12,9 @@ const menuItems = [
 ];
 
 const socialItems = [
-  { label: 'Instagram', link: 'https://instagram.com/visionema_net' },
-  { label: 'Lynk.id', link: 'https://lynk.id/visionema.id' }
+  { label: 'Instagram', link: 'https://www.instagram.com/visionema_net' },
+  { label: 'Threads.id', link: 'https://www.threads.com/@visionema_net' },
+  { label: 'TikTok', link: 'https://www.tiktok.com/@visionema.net' },
 ];
 
 export default function Header() {

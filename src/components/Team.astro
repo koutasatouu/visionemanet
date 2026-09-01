@@ -1,12 +1,14 @@
 ---
-import team1 from '../assets/team/team1.webp';
-import team2 from '../assets/team/team2.webp';
-import team3 from '../assets/team/team3.webp';
-import team4 from '../assets/team/team4.webp';
-import team5 from '../assets/team/team5.webp';
-import team6 from '../assets/team/team6.webp';
-import team7 from '../assets/team/team7.webp';
-import AnimatedContent from './reactbits/AnimatedContent';
+import team1 from "../assets/team/team1.webp";
+import team2 from "../assets/team/team2.webp";
+import team3 from "../assets/team/team3.webp";
+import team4 from "../assets/team/team4.webp";
+import team5 from "../assets/team/team5.webp";
+import team6 from "../assets/team/team6.webp";
+import team7 from "../assets/team/team7.webp";
+import team8 from "../assets/team/team8.webp";
+import team9 from "../assets/team/team9.webp";
+import AnimatedContent from "./reactbits/AnimatedContent";
 
 // Team members images in exact order (team1 to team7 + exactly 1 coming soon slot)
 const originalList = [
@@ -17,33 +19,55 @@ const originalList = [
   { image: team5, alt: "Visionema Team Member 5" },
   { image: team6, alt: "Visionema Team Member 6" },
   { image: team7, alt: "Visionema Team Member 7" },
-  { isPlaceholder: true, label: "Coming Soon" },
+  { image: team8, alt: "Visionema Team Member 8" },
+  { image: team9, alt: "Visionema Team Member 9" },
+  // { isPlaceholder: false, label: "Coming Soon" },
 ];
 
 // Tripled list to enable seamless infinite looping without dead-ends
 const infiniteList = [...originalList, ...originalList, ...originalList];
 ---
 
-<section id="team" class="py-20 bg-transparent relative border-t border-white/5 overflow-hidden">
+<section
+  id="team"
+  class="py-20 bg-transparent relative border-t border-white/5 overflow-hidden"
+>
   <div class="max-w-360 2xl:max-w-450 3xl:max-w-550 mx-auto relative z-10">
-    
     <!-- Section Header with Prev/Next Controls (keeps padding on all screens) -->
     <div class="px-6 sm:px-12 lg:px-24">
-      <AnimatedContent distance={40} direction="vertical" duration={0.7} threshold={0.15} client:visible>
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+      <AnimatedContent
+        distance={40}
+        direction="vertical"
+        duration={0.7}
+        threshold={0.15}
+        client:visible
+      >
+        <div
+          class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6"
+        >
           <div>
-            <span class="text-xs uppercase font-mono tracking-widest text-blue-400 font-bold block mb-2">
+            <span
+              class="text-xs uppercase font-mono tracking-widest text-blue-400 font-bold block mb-2"
+            >
               Di Balik Layar
             </span>
-            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
-              Mengenal Lebih Dekat <span class="font-serif italic font-normal text-foreground">Tim Visionema</span>
+            <h2
+              class="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground"
+            >
+              Mengenal Lebih Dekat <span
+                class="font-serif italic font-normal text-foreground"
+                >Tim Visionema</span
+              >
             </h2>
           </div>
-          
+
           <!-- Controls & Subtitle -->
           <div class="flex items-center justify-between md:justify-end gap-6">
-            <p class="text-foreground/75 text-sm sm:text-base max-w-xs leading-relaxed hidden sm:block">
-              Kreator, videografer, desainer, dan strategist yang siap mengakselerasi brand Anda.
+            <p
+              class="text-foreground/75 text-sm sm:text-base max-w-xs leading-relaxed hidden sm:block"
+            >
+              Kreator, videografer, desainer, dan strategist yang siap
+              mengakselerasi brand Anda.
             </p>
             <div class="flex items-center gap-3">
               <button
@@ -51,8 +75,14 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
                 aria-label="Previous team slide"
                 class="w-11 h-11 rounded-full border border-white/10 bg-white/5 hover:bg-white/15 hover:border-blue-500/50 flex items-center justify-center text-white transition-all duration-300 active:scale-95 cursor-pointer"
               >
-                <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                <svg
+                  class="w-4 h-4 fill-none stroke-current stroke-[2.5]"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 19.5L8.25 12l7.5-7.5"></path>
                 </svg>
               </button>
               <button
@@ -60,8 +90,14 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
                 aria-label="Next team slide"
                 class="w-11 h-11 rounded-full border border-white/10 bg-white/5 hover:bg-white/15 hover:border-blue-500/50 flex items-center justify-center text-white transition-all duration-300 active:scale-95 cursor-pointer"
               >
-                <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                <svg
+                  class="w-4 h-4 fill-none stroke-current stroke-[2.5]"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
                 </svg>
               </button>
             </div>
@@ -78,24 +114,31 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
         class="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-4 sm:px-0 scroll-smooth select-none cursor-grab active:cursor-grabbing"
         style="scrollbar-width: none; -ms-overflow-style: none;"
       >
-        {infiniteList.map((item) => (
-          <div 
-            class="team-carousel-slide shrink-0 snap-center sm:snap-start w-[76%] sm:w-[45%] md:w-[30%] lg:w-[calc((100%-4*1.25rem)/5)] transition-all duration-500 opacity-60 sm:opacity-100 scale-95 sm:scale-100 blur-[1.5px] sm:blur-none"
-          >
-            {item.isPlaceholder ? (
-              <!-- Minimal transparent placeholder for 1 upcoming member -->
-              <div class="relative aspect-4/5 w-full overflow-hidden rounded-2xl border border-dashed border-white/15 bg-transparent flex flex-col items-center justify-center p-4 text-center">
-                <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2.5">
-                  <svg class="w-4 h-4 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15" />
-                  </svg>
+        {
+          infiniteList.map((item) => (
+            <div class="team-carousel-slide shrink-0 snap-center sm:snap-start w-[76%] sm:w-[45%] md:w-[30%] lg:w-[calc((100%-4*1.25rem)/5)] transition-all duration-500 opacity-60 sm:opacity-100 scale-95 sm:scale-100 blur-[1.5px] sm:blur-none">
+              {/* {item.isPlaceholder ? (
+                <div class="relative aspect-4/5 w-full overflow-hidden rounded-2xl border border-dashed border-white/15 bg-transparent flex flex-col items-center justify-center p-4 text-center">
+                  <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2.5">
+                    <svg
+                      class="w-4 h-4 text-foreground/40"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M12 4.5v15m7.5-7.5h-15"
+                      />
+                    </svg>
+                  </div>
+                  <span class="text-[11px] font-mono uppercase tracking-wider text-foreground/40 font-bold">
+                    {item.label}
+                  </span>
                 </div>
-                <span class="text-[11px] font-mono uppercase tracking-wider text-foreground/40 font-bold">
-                  {item.label}
-                </span>
-              </div>
-            ) : (
-              <!-- Pure Image Only -->
+              ) : ( */}
               <div class="relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-transparent">
                 <img
                   src={item.image?.src}
@@ -105,20 +148,20 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
                   class="w-full h-full object-cover object-center pointer-events-none"
                 />
               </div>
-            )}
-          </div>
-        ))}
+              {/* )} */}
+            </div>
+          ))
+        }
       </div>
     </div>
-
   </div>
 </section>
 
 <script>
   function setupTeamCarousel() {
-    const track = document.getElementById('team-carousel-track');
-    const prevBtn = document.getElementById('team-prev-btn');
-    const nextBtn = document.getElementById('team-next-btn');
+    const track = document.getElementById("team-carousel-track");
+    const prevBtn = document.getElementById("team-prev-btn");
+    const nextBtn = document.getElementById("team-next-btn");
 
     if (!track || !prevBtn || !nextBtn) return;
 
@@ -153,14 +196,14 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
 
     setTimeout(setInitialPosition, 100);
 
-    prevBtn.addEventListener('click', () => {
+    prevBtn.addEventListener("click", () => {
       checkInfiniteBounds();
-      track.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+      track.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
     });
 
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener("click", () => {
       checkInfiniteBounds();
-      track.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+      track.scrollBy({ left: getScrollStep(), behavior: "smooth" });
     });
 
     // Touch & Drag-to-scroll support with infinite boundary normalization
@@ -168,22 +211,22 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
     let startX = 0;
     let scrollLeft = 0;
 
-    track.addEventListener('mousedown', (e) => {
+    track.addEventListener("mousedown", (e) => {
       isDown = true;
       startX = e.pageX - track.offsetLeft;
       scrollLeft = track.scrollLeft;
     });
 
-    track.addEventListener('mouseleave', () => {
+    track.addEventListener("mouseleave", () => {
       isDown = false;
     });
 
-    track.addEventListener('mouseup', () => {
+    track.addEventListener("mouseup", () => {
       isDown = false;
       checkInfiniteBounds();
     });
 
-    track.addEventListener('mousemove', (e) => {
+    track.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - track.offsetLeft;
@@ -192,17 +235,18 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
     });
 
     // Highlight active card on mobile (unblur center card, softly blur adjacent cards)
-    const slides = track.querySelectorAll('.team-carousel-slide');
+    const slides = track.querySelectorAll(".team-carousel-slide");
     const updateActiveSlide = () => {
       if (window.innerWidth >= 640) {
-        slides.forEach(slide => {
-          slide.classList.remove('opacity-60', 'blur-[1.5px]', 'scale-95');
-          slide.classList.add('opacity-100', 'blur-none', 'scale-100');
+        slides.forEach((slide) => {
+          slide.classList.remove("opacity-60", "blur-[1.5px]", "scale-95");
+          slide.classList.add("opacity-100", "blur-none", "scale-100");
         });
         return;
       }
 
-      const trackCenter = track.getBoundingClientRect().left + track.offsetWidth / 2;
+      const trackCenter =
+        track.getBoundingClientRect().left + track.offsetWidth / 2;
 
       let closestSlide: HTMLElement | null = null;
       let minDistance = Infinity;
@@ -222,23 +266,27 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
       slides.forEach((slideEl) => {
         const slide = slideEl as HTMLElement;
         if (slide === closestSlide) {
-          slide.classList.remove('opacity-60', 'blur-[1.5px]', 'scale-95');
-          slide.classList.add('opacity-100', 'blur-none', 'scale-100');
+          slide.classList.remove("opacity-60", "blur-[1.5px]", "scale-95");
+          slide.classList.add("opacity-100", "blur-none", "scale-100");
         } else {
-          slide.classList.remove('opacity-100', 'blur-none', 'scale-100');
-          slide.classList.add('opacity-60', 'blur-[1.5px]', 'scale-95');
+          slide.classList.remove("opacity-100", "blur-none", "scale-100");
+          slide.classList.add("opacity-60", "blur-[1.5px]", "scale-95");
         }
       });
     };
 
-    track.addEventListener('scroll', () => {
-      window.requestAnimationFrame(updateActiveSlide);
-    }, { passive: true });
+    track.addEventListener(
+      "scroll",
+      () => {
+        window.requestAnimationFrame(updateActiveSlide);
+      },
+      { passive: true },
+    );
 
     setTimeout(updateActiveSlide, 150);
 
     // Adjust on window resize
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       setInitialPosition();
       updateActiveSlide();
     });
@@ -246,7 +294,7 @@ const infiniteList = [...originalList, ...originalList, ...originalList];
 
   // Setup on initial load & after view transitions
   setupTeamCarousel();
-  document.addEventListener('astro:page-load', setupTeamCarousel);
+  document.addEventListener("astro:page-load", setupTeamCarousel);
 </script>
 
 <style>
